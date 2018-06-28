@@ -1,0 +1,266 @@
+import json
+#Spring Sem data
+
+#See the erp central time table
+#It has slots in a day from 1-9,We use codes MON,TUE and so on
+slots = [{
+	"SLOT":"A2",
+	"TIME":{
+		"MON":[1,2]
+	}	
+},
+{
+	"SLOT":"B2",
+	"TIME":{
+		"TUE":[1,2]
+	}
+},
+{
+	"SLOT":"C2",
+	"TIME":{
+		"WED":[1,2]
+	}
+},
+{
+	"SLOT":"D2",
+	"TIME":{
+		"TUE":[3,4]
+	}
+},
+{
+	"SLOT":"E2",
+	"TIME":{
+		"FRI":[2,3]
+	}
+},
+{
+	"SLOT":"F2",
+	"TIME":{
+		"FRI":[4,5]
+	}
+},
+{
+	"SLOT":"U2",
+	"TIME":{
+		"MON":[7,8]
+	}
+},
+{
+	"SLOT":"H2",
+	"TIME":{
+		"TUE":[8,9]
+	}
+},
+{
+	"SLOT":"V2",
+	"TIME":{
+		"THU":[7,8]
+	}
+},
+{
+	"SLOT":"I2",
+	"TIME":{
+		"THU":[6],
+		"FRI":[8]
+	}
+},
+{
+	"SLOT":"C3",
+	"TIME":{
+		"MON":[3],
+		"WED":[1,2]
+	}
+},
+{
+	"SLOT":"D3",
+	"TIME":{
+		"MON":[5],
+		"TUE":[3,4]
+	}
+},
+{
+	"SLOT":"E3",
+	"TIME":{
+		"WED":[5],
+		"THU":[4],
+		"FRI":[2]
+	}
+},
+{
+	"SLOT":"F3",
+	"TIME":{
+		"WED":[3],
+		"THU":[2],
+		"FRI":[4]
+	}
+},
+{
+	"SLOT":"U3",
+	"TIME":{
+		"MON":[7,8],
+		"TUE":[7]
+	}
+},
+{
+	"SLOT":"V3",
+	"TIME":{
+		"THU":[7,8],
+		"FRI":[7]
+	}
+},
+{
+	"SLOT":"A3",
+	"TIME":{
+		"MON":[1,2],
+		"TUE":[5]
+	}
+},
+{
+	"SLOT":"B3",
+	"TIME":{
+		"MON":[4],
+		"TUE":[1,2]
+	}
+},
+{
+	"SLOT":"G3",
+	"TIME":{
+		"WED":[4],
+		"THU":[5],
+		"FRI":[1]
+	}
+},
+{
+	"SLOT":"H3",
+	"TIME":{
+		"MON":[6],
+		"TUE":[8,9]
+	}
+},
+{
+	"SLOT":"S3",
+	"TIME":{
+		"MON":[9],
+		"THU":[9],
+		"FRI":[9]
+	}
+},
+{
+	"SLOT":"C4",
+	"TIME":{
+		"MON":[3],
+		"WED":[1,2],
+		"THU":[3]
+	}
+},
+{
+	"SLOT":"D4",
+	"TIME":{
+		"MON":[5],
+		"TUE":[3,4],
+		"THU":[1]
+	}
+},
+{
+	"SLOT":"E4",
+	"TIME":{
+		"WED":[5],
+		"THU":[4],
+		"FRI":[2,3]
+	}
+},
+{
+	"SLOT":"F4",
+	"TIME":{
+		"WED":[3],
+		"THU":[2],
+		"FRI":[4,5]
+	}
+},
+{
+	"SLOT":"U4",
+	"TIME":{
+		"MON":[7,8],
+		"TUE":[6,7]
+	}
+},
+{
+	"SLOT":"V4",
+	"TIME":{
+		"THU":[7,8],
+		"FRI":[6,7]
+	}
+},
+{
+	"SLOT":"Q",
+	"TIME":{
+		"MON":[3,4,5],
+	}
+},
+{
+	"SLOT":"J",
+	"TIME":{
+		"MON":[6,7,8],
+	}
+},
+{
+	"SLOT":"K",
+	"TIME":{
+		"TUE":[3,4,5],
+	}
+},
+{
+	"SLOT":"L",
+	"TIME":{
+		"TUE":[6,7,8],
+	}
+},
+{
+	"SLOT":"R",
+	"TIME":{
+		"WED":[3,4,5],
+	}
+},
+{
+	"SLOT":"M",
+	"TIME":{
+		"THU":[3,4,5],
+	}
+},
+{
+	"SLOT":"X",
+	"TIME":{
+		"WED":[6,7,8],
+	}
+},
+{
+	"SLOT":"N",
+	"TIME":{
+		"THU":[6,7,8],
+	}
+},
+{
+	"SLOT":"O",
+	"TIME":{
+		"FRI":[3,4,5],
+	}
+},
+{
+	"SLOT":"P",
+	"TIME":{
+		"FRI":[6,7,8],
+	}
+}
+]
+
+with open('slots_autumn.json','w') as f:
+	json.dump(slots,f)
+
+#Read
+with open('slots_autumn.json','r+') as f:
+	d = str(f.read())
+
+j = json.loads(d)
+
+for slot in j:
+	print("SLOT : " + slot["SLOT"] + " , Time : " + str(slot["TIME"]))

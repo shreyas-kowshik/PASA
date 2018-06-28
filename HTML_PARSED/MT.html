@@ -1,0 +1,359 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : MT</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>MT20006</td>
+<td>MATERIALS PROCESSING</td>
+<td>Tapas Kumar Bandyopadhyay</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT21008</td>
+<td>DEFORMATION BEHAVIOUR OF MATERIALS</td>
+<td>Sumantra Mandal,Debalay Chakrabarti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT21010</td>
+<td>TRANSPORT PHENOMENA IN METALLURGICAL PROCESSES</td>
+<td>Tarun Kumar Kundu</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT21104</td>
+<td>GENETIC ALGORITHMS IN ENGINEERING PROCESS MODELING</td>
+<td>Nirupam Chakraborti</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>U3</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT29006</td>
+<td>MATERIALS PROCESSING LAB.</td>
+<td>Amit Bhaduri,Koushik Biswas,Tapas Kumar Bandyopadhyay</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X4, N</td>
+<td>MELTING &amp; CASTING LAB#POWDER METALLURGY LAB, MELTING &amp; CASTING LAB#METALLOGRAPHY LAB</td>
+<tr><td>MT31012</td>
+<td>MATERIAL CHARACTERIZATION</td>
+<td>Jayanta Das</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>MT ANNEX-3</td>
+<tr><td>MT31022</td>
+<td>X-RAY DIFFRACTION &amp; TRANSMISSION ELECTRON MICROSCOPY</td>
+<td>Karabi Das</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>MT ANNEX-3</td>
+<tr><td>MT32008</td>
+<td>IRON MAKING &amp; STEELMAKING</td>
+<td>Gour Gopal Roy</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>MT ANNEX-3</td>
+<tr><td>MT39004</td>
+<td>MATERIALS CHARACTERISATION LAB.</td>
+<td>Rahul Mitra,Shampa Aich,Jayanta Das,Somjeet Biswas</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, N</td>
+<td>MECHANICAL CHARACTERIZATION LAB</td>
+<tr><td>MT39022</td>
+<td>X-RAY DIFFRACTION &amp; TRANSMISSION ELECTRON MICROSCOPY LABORATORY</td>
+<td>Siddhartha Das,Karabi Das,Tapas Laha,Tapas Kumar Bandyopadhyay</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, N</td>
+<td>TEM LAB &amp; TEM SAMPLE PREPARATION LAB#X RAY DIFFRACTION LAB</td>
+<tr><td>MT41007</td>
+<td>JOINING OF METALS</td>
+<td>Jyotsna Dutta Majumdar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>MT ANNEX-1</td>
+<tr><td>MT41009</td>
+<td>COMPUTER APPLICATIONS IN METALLURGICAL PROCESSES</td>
+<td>Amlan Dutta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>MT ANNEX-3</td>
+<tr><td>MT41018</td>
+<td>CERAMIC MATERIALS</td>
+<td>Koushik Biswas</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>MT ANNEX-1</td>
+<tr><td>MT41112</td>
+<td>SURFACE ENGINEERING</td>
+<td>Indranil Manna</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>MT ANNEX-1</td>
+<tr><td>MT47001</td>
+<td>PROJECT-I</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>--</td>
+<tr><td>MT47002</td>
+<td>PROJECT-II</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-9</td>
+<td>6</td>
+<td>--</td>
+<tr><td>MT48002</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MT48003</td>
+<td>SUMMER TRAINING</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MT49009</td>
+<td>COMPUTER APPLICATIONS IN METALLURGICAL PROCESSES LABORATORY</td>
+<td>Nirupam Chakraborti,Tarun Kumar Kundu</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>COMPUTER LAB</td>
+<tr><td>MT57003</td>
+<td>PROJECT III</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-15</td>
+<td>12</td>
+<td>--</td>
+<tr><td>MT57004</td>
+<td>PROJECT IV</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-22</td>
+<td>13</td>
+<td>--</td>
+<tr><td>MT58002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Debalay Chakrabarti</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MT60002</td>
+<td>METALLURGICAL KINETICS</td>
+<td>Sujoy Kumar Kar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>MT310</td>
+<tr><td>MT60004</td>
+<td>PRINCIPLES AND TECHNIQUES OF MATERIALS CHARACTERIZATION</td>
+<td>Siddhartha Das</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>MT310</td>
+<tr><td>MT60006</td>
+<td>GRAIN BOUNDARIES AND INTERFACES</td>
+<td>Sumantra Mandal</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>MT310</td>
+<tr><td>MT60024</td>
+<td>FRACTURE MECHANICS &amp; ANALYSIS OF ENGG. FAILURES</td>
+<td>Indrani Sen,Debalay Chakrabarti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT60134</td>
+<td>BIOMATERIALS</td>
+<td>Mangal Roy</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>MT310</td>
+<tr><td>MT60148</td>
+<td>MAGNETISM &amp; MAGNETIC MATERIALS</td>
+<td>Shampa Aich</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT60150</td>
+<td>TEXTURE IN MATERIALS ENGINEERING</td>
+<td>Somjeet Biswas</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>MT ANNEX-1</td>
+<tr><td>MT61128</td>
+<td>PHASE TRANSFORMATIONS AND PHASE EQUILIBRIA</td>
+<td>Shiv Brat Singh</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>MT310</td>
+<tr><td>MT61136</td>
+<td>ADVANCED MATERIALS AND PROCESSES</td>
+<td>Tapas Laha</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>MT310</td>
+<tr><td>MT61138</td>
+<td>ADVANCES IRON AND STEEL MAKING</td>
+<td>Prodip Kumar Sen</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>MT310</td>
+<tr><td>MT61146</td>
+<td>ADVANCED ELECTRON MICROSCOPY &amp; ANALYSIS</td>
+<td>Rahul Mitra</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>MT ANNEX-4</td>
+<tr><td>MT67102</td>
+<td>THESIS PART-II</td>
+<td>Shiv Brat Singh</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>MT68101</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Shiv Brat Singh</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>MT69002</td>
+<td>SEMINAR-II</td>
+<td>Jyotsna Dutta Majumdar,Indrani Sen,Prodip Kumar Sen,Sudipto Ghosh</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J, X4</td>
+<td>MT310</td>
+<tr><td>MT69006</td>
+<td>FRACTURE MECHANICS &amp; ANALYSIS OF ENGINEERING FAILURES LAB.</td>
+<td>Indrani Sen,Debalay Chakrabarti</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>L</td>
+<td>INSTRON LAB</td>
+<tr><td>MT69008</td>
+<td>PHASE TRANSFORMATION LAB.</td>
+<td>Sujoy Kumar Kar,Shiv Brat Singh</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>L</td>
+<td>DTA LAB</td>
+<tr bgcolor="pink"><td>MT69014</td>
+<td>---------</td>
+<td>---------</td>
+<td>L</td>
+<td>POWDER METALLURGY LAB</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

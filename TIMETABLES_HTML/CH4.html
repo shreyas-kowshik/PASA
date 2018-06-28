@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+
+     function printInfo(elementid,styleSheetHref){
+        var prtContent="&lt;html&gt;&lt;head&gt;";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="&lt;link rel='StyleSheet' href='"+styleSheetHref+"' /&gt;";
+        }
+        prtContent+="&lt;/head&gt;&lt;body&gt;";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="&lt;/body&gt;";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+
+      function getsub_details(subno,obj)
+{
+  // alert(subno);
+
+  var xmlHttp;
+     //var subno=document.getElementById(row_id).value==''?document.getElementById(nex_row_id).value:document.getElementById(row_id).value;
+    // alert(subno);
+        try
+        {  // Firefox, Opera 8.0+, Safari
+            xmlHttp=new XMLHttpRequest();
+        }
+        catch (e)
+        {  // Internet Explorer
+            try
+            {
+                xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch (e)
+            {
+                try
+                {
+                    xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                catch (e)
+                {
+                    alert("Your browser does not support AJAX!");
+                    return false;
+                }
+            }
+        }
+        xmlHttp.open("GET","getsub_view.jsp?subno="+subno+"&amp;session="+document.getElementById('session').value,false);
+        xmlHttp.send(null);
+        if(xmlHttp.status==200){
+            document.getElementById('nameList').style.display='inline';
+           var detail_info=xmlHttp.responseText;
+           toggleList(obj,'show', detail_info)
+        }
+
+     }
+
+
+
+
+ function toggleList(obj,action, detail_info){
+            var div_ref = document.getElementById('nameList');
+            var x=0,y=0;
+            var obj1 = obj;
+            while(obj.offsetParent){
+                x += obj.offsetLeft;
+                y += obj.offsetTop;
+                obj = obj.offsetParent;
+            }
+            var abs_x = x+'px', abs_y = (y+obj1.offsetHeight)+'px';
+            div_ref.style.left = abs_x;
+            div_ref.style.top = abs_y;
+            div_ref.innerHTML=detail_info;
+            switch(action){
+                case 'show':
+                div_ref.style.display = 'block';
+                break;
+                case 'hide':
+                div_ref.style.display = 'none';
+                break;
+                default:
+            }
+        }
+ </script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Time Table View</title>
+<link href="../css/style1.css" rel="StyleSheet"/>
+</head>
+<body><form action="secwiseview.jsp?action=first" method="post" name="frm">
+<div id="printIt">
+<center><font color=""><b></b></font></center>
+<table border="1" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white"><td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">Day Name</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">8:00:AM-8:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">9:00:AM-9:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">10:00:AM-10:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">11:00:AM-11:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">12:00:PM-12:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">2:00:PM-2:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">3:00:PM-3:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">4:00:PM-4:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">5:00:PM-5:55:PM</td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Mon</td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62009&lt;BR&gt;(SR)&lt;BR&gt;NC341",this)'>CH62009<br/>(SR)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62009&lt;BR&gt;(SR)&lt;BR&gt;NC341",this)'>CH62009<br/>(SR)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62001&lt;BR&gt;(DS+ ANS)&lt;BR&gt;NC341",this)'>CH62001<br/>(DS+ ANS)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61026&lt;BR&gt;(JC)&lt;BR&gt;NC342",this)'>CH61026<br/>(JC)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62003&lt;BR&gt;(SM)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62003<br/>(SM)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH40001&lt;BR&gt;(SC+ SN)&lt;BR&gt;NC232",this)'>CH40001<br/>(SC+ SN)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH40001&lt;BR&gt;(SN+ SC)&lt;BR&gt;NC232",this)'>CH40001<br/>(SN+ SC)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62015&lt;BR&gt;(PAD)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62015<br/>(PAD)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62021&lt;BR&gt;(GD)&lt;BR&gt;NC344",this)'>CH62021<br/>(GD)<br/>NC344</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62007&lt;BR&gt;(SN+ BCM)&lt;BR&gt;NC342",this)'>CH62007<br/>(SN+ BCM)<br/>NC342</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62039&lt;BR&gt;(SG+ SD)&lt;BR&gt;NR123",this)'>CH62039<br/>(SG+ SD)<br/>NR123</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62045&lt;BR&gt;(S N+ MK)&lt;BR&gt;NC232",this)'>CH62045<br/>(S N+ MK)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62047&lt;BR&gt;(SC)&lt;BR&gt;NC431",this)'>CH62047<br/>(SC)<br/>NC431</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Tue</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61026&lt;BR&gt;(JC)&lt;BR&gt;NC342",this)'>CH61026<br/>(JC)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61026&lt;BR&gt;(JC)&lt;BR&gt;NC342",this)'>CH61026<br/>(JC)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62003&lt;BR&gt;(SM)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62003<br/>(SM)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62003&lt;BR&gt;(SM)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62003<br/>(SM)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62009&lt;BR&gt;(SR)&lt;BR&gt;NC341",this)'>CH62009<br/>(SR)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH40001&lt;BR&gt;(SC+ SN)&lt;BR&gt;NC232",this)'>CH40001<br/>(SC+ SN)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62021&lt;BR&gt;(GD)&lt;BR&gt;NC344",this)'>CH62021<br/>(GD)<br/>NC344</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62021&lt;BR&gt;(GD)&lt;BR&gt;NC344",this)'>CH62021<br/>(GD)<br/>NC344</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62007&lt;BR&gt;(SN+ BCM)&lt;BR&gt;NC342",this)'>CH62007<br/>(SN+ BCM)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62007&lt;BR&gt;(BCM+ SN)&lt;BR&gt;NC342",this)'>CH62007<br/>(BCM+ SN)<br/>NC342</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62045&lt;BR&gt;(S N+ MK)&lt;BR&gt;NC232",this)'>CH62045<br/>(S N+ MK)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62045&lt;BR&gt;(S N+ MK)&lt;BR&gt;NC232",this)'>CH62045<br/>(S N+ MK)<br/>NC232</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62047&lt;BR&gt;(SC)&lt;BR&gt;NC431",this)'>CH62047<br/>(SC)<br/>NC431</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62047&lt;BR&gt;(SC)&lt;BR&gt;NC431",this)'>CH62047<br/>(SC)<br/>NC431</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Wed</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62001&lt;BR&gt;(DS+ ANS)&lt;BR&gt;NC341",this)'>CH62001<br/>(DS+ ANS)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62001&lt;BR&gt;(DS+ ANS)&lt;BR&gt;NC341",this)'>CH62001<br/>(DS+ ANS)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61011&lt;BR&gt;(HG+ RM)&lt;BR&gt;NC342",this)'>CH61011<br/>(HG+ RM)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62015&lt;BR&gt;(PAD)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62015<br/>(PAD)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62015&lt;BR&gt;(PAD)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62015<br/>(PAD)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61015&lt;BR&gt;(PAD+ SD)&lt;BR&gt;NC442",this)'>CH61015<br/>(PAD+ SD)<br/>NC442</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62039&lt;BR&gt;(SD+ SG)&lt;BR&gt;NR123",this)'>CH62039<br/>(SD+ SG)<br/>NR123</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62039&lt;BR&gt;(SD+ SG)&lt;BR&gt;NR123",this)'>CH62039<br/>(SD+ SG)<br/>NR123</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Thur</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62003&lt;BR&gt;(SM)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62003<br/>(SM)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62001&lt;BR&gt;(DS+ ANS)&lt;BR&gt;NC341",this)'>CH62001<br/>(DS+ ANS)<br/>NC341</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61011&lt;BR&gt;(RM+ HG)&lt;BR&gt;NC342",this)'>CH61011<br/>(RM+ HG)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="3" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH49015&lt;BR&gt;(MK+ SS+ ANS+ JKB)&lt;BR&gt;RxnEngg Lab",this)'>CH49015<br/>(MK+ SS+ ANS+ JKB)<br/>RxnEngg Lab</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61026&lt;BR&gt;(JC)&lt;BR&gt;NC342",this)'>CH61026<br/>(JC)<br/>NC342</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62047&lt;BR&gt;(SC)&lt;BR&gt;NC431",this)'>CH62047<br/>(SC)<br/>NC431</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61015&lt;BR&gt;(PAD+ SD)&lt;BR&gt;NC442",this)'>CH61015<br/>(PAD+ SD)<br/>NC442</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62015&lt;BR&gt;(PAD)&lt;BR&gt;Prof. A.N. Roy Seminar Hall",this)'>CH62015<br/>(PAD)<br/>Prof. A.N. Roy Seminar Hall</a></td>
+<td align="center" colspan="3" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH49019&lt;BR&gt;(SC+ AA+ DS+ AKJ)&lt;BR&gt;CAPE Lab",this)'>CH49019<br/>(SC+ AA+ DS+ AKJ)<br/>CAPE Lab</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62021&lt;BR&gt;(GD)&lt;BR&gt;NC344",this)'>CH62021<br/>(GD)<br/>NC344</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH62045&lt;BR&gt;(MK+ S N)&lt;BR&gt;NC232",this)'>CH62045<br/>(MK+ S N)<br/>NC232</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px" valign="top">Fri</td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61011&lt;BR&gt;(RM+ HG)&lt;BR&gt;NC342",this)'>CH61011<br/>(RM+ HG)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61011&lt;BR&gt;(RM+ HG)&lt;BR&gt;NC342",this)'>CH61011<br/>(RM+ HG)<br/>NC342</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("B&lt;BR&gt;",this)'>B<br/></a></td>
+<td align="center" colspan="3" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH49015&lt;BR&gt;(JKB+ SS+ MK+ ANS)&lt;BR&gt;RxnEngg Lab",this)'>CH49015<br/>(JKB+ SS+ MK+ ANS)<br/>RxnEngg Lab</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61015&lt;BR&gt;(SD+ PAD)&lt;BR&gt;NC442",this)'>CH61015<br/>(SD+ PAD)<br/>NC442</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH61015&lt;BR&gt;(SD+ PAD)&lt;BR&gt;NC442",this)'>CH61015<br/>(SD+ PAD)<br/>NC442</a></td>
+<td align="center" colspan="3" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CH49019&lt;BR&gt;(AA+ AKJ+ SC+ DS)&lt;BR&gt;CAPE Lab",this)'>CH49019<br/>(AA+ AKJ+ SC+ DS)<br/>CAPE Lab</a></td>
+</tr>
+</tbody></table></div><input id="semester" name="semester" type="hidden" value="AUTUMN"/>
+<input id="session" name="session" type="hidden" value="2018-2019"/>
+</form>
+<form action="../deptTimeTableReport.htm" method="GET" name="reportForm">
+<input id="semester" name="semester" type="hidden" value="AUTUMN"/>
+<input id="year1" name="year1" type="hidden" value="4"/>
+<input id="session" name="session" type="hidden" value="2018-2019"/>
+<input id="course" name="course" type="hidden" value="CH"/>
+<input id="dept" name="dept" type="hidden" value="CH"/>
+<center><input class="button" type="submit" value="GetReport"/></center></form>
+<div align="right" id="nameList" onmouseout="this.style.display = 'none';" onmouseover="this.style.display = 'block';" style="background-color:#FFFFCC;border:thin;border-style:solid;border-color:#FFFFFF ;position:absolute;display:none">
+</div></body></html>

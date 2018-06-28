@@ -1,0 +1,410 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : PH</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>PH00002</td>
+<td>PREPARATORY PHYSICS</td>
+<td>Sitikantha Dhurjati Das</td>
+<td>4-1-0</td>
+<td>5</td>
+<td>C4</td>
+<td>F233</td>
+<tr><td>PH09002</td>
+<td>PREPARATORY PHYSICS LABORATORY</td>
+<td>Simone Peli</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>C226</td>
+<tr><td>PH11001</td>
+<td>PHYSICS</td>
+<td>Kamal Lochan Panigrahi,Ajay Kumar Singh,Sugata Pratik Khastgir,Maruthi Manoj Brundavanam</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>PH19001</td>
+<td>PHYSICS LAB.</td>
+<td>Simone Peli,Debraj Choudhury,Sandipan Sengupta,Sanjeev Kumar Srivastava,Arghya Taraphder,Partha Roy Chaudhuri,Sajal Dhara,Sitikantha Dhurjati Das,Sudhansu Sekhar Mandal,Bhupendra Nath Dev,NISHA PAWAR,Dipak Kumar Goswami,SWASTIKA CHATTERJEE</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>--</td>
+<tr><td>PH20101</td>
+<td>FLUID MECHANICS AND ELASTICITY</td>
+<td>Poornachandra Sekhar Burada</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NR224</td>
+<tr><td>PH21004</td>
+<td>THERMAL PHYSICS</td>
+<td>Sajal Dhara</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NR224</td>
+<tr><td>PH29008</td>
+<td>ELECTROMAGNETISM &amp; OPTICS LAB - I</td>
+<td>Achintya Dhar,Pragya Shukla</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>J, N</td>
+<td>0</td>
+<tr><td>PH39008</td>
+<td>ELECTROMAGNETISM &amp; OPTICS LAB - III</td>
+<td>Shivakiran B N Bhaktha,Prasanta Kumar Datta,Sayan Kar,Samudra Roy</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, X4, L, N</td>
+<td>0</td>
+<tr><td>PH41008</td>
+<td>MATHEMATICAL METHODS -II</td>
+<td>Jyotirmoy Bhattacharya</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>NC332</td>
+<tr><td>PH41009</td>
+<td>ORDER AND CHAOS</td>
+<td>Krishna Kumar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NC332</td>
+<tr><td>PH41010</td>
+<td>QUANTUM MECHANICS-II</td>
+<td>Sonjoy Majumder</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>NC332</td>
+<tr><td>PH41012</td>
+<td>COMPUTATIONAL METHODS</td>
+<td>Debamalya Banerjee</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>E2</td>
+<td>NC332</td>
+<tr><td>PH41014</td>
+<td>CONDENSED MATTER PHYSICS-I</td>
+<td>Amreesh Chandra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NC332</td>
+<tr><td>PH41016</td>
+<td>NUCLEAR AND PARTICLE PHYSICS -I</td>
+<td>Utpal Sarkar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NC332</td>
+<tr><td>PH49006</td>
+<td>ELECTROMAGNETISM &amp; OPTICS LAB. B</td>
+<td>Shivakiran B N Bhaktha,Prasanta Kumar Datta,Samudra Roy,Sayan Kar</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, X4, L, N</td>
+<td>0</td>
+<tr><td>PH49012</td>
+<td>COMPUTATIONAL PHYSICS LAB.</td>
+<td>Partha Roy Chaudhuri,Debamalya Banerjee</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>0</td>
+<tr><td>PH49014</td>
+<td>CONDENSED MATTER PHYSICS LAB-II</td>
+<td>Poornachandra Sekhar Burada,Amar Nath Gupta,Tapan Kumar Nath</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>J, N</td>
+<td>0</td>
+<tr><td>PH49016</td>
+<td>NUCLEAR &amp; PARTICLE PHYSICS LAB I</td>
+<td>Utpal Sarkar,Tirtha Sankar Ray,Sonjoy Majumder,Somnath Bharadwaj</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, X4, L, N</td>
+<td>0</td>
+<tr><td>PH52002</td>
+<td>ATOMIC AND MOLECULAR PHYSICS</td>
+<td>Prasanta Kumar Datta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NC333</td>
+<tr><td>PH52005</td>
+<td>ORDER &amp; CHAOS</td>
+<td>Krishna Kumar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NC332</td>
+<tr><td>PH58042</td>
+<td>COMPREHENSIVE VIVA VOCE-II</td>
+<td>Partha Roy Chaudhuri</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>X</td>
+<td>0</td>
+<tr><td>PH58044</td>
+<td>COMPREHENSIVE VIVA VOCE-I</td>
+<td>Partha Roy Chaudhuri</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>L</td>
+<td>0</td>
+<tr><td>PH58050</td>
+<td>COMPREHENSIVE VIVA I</td>
+<td>Partha Roy Chaudhuri</td>
+<td>0-0-2</td>
+<td>2</td>
+<td>X</td>
+<td>0</td>
+<tr><td>PH59008</td>
+<td>MODERN PHYSICS LAB.</td>
+<td>Amal Kumar Das,Anushree Roy</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, J, X4</td>
+<td>0</td>
+<tr><td>PH59010</td>
+<td>CONDENSED MATTER PHYSICS LAB-II</td>
+<td>Amar Nath Gupta,Poornachandra Sekhar Burada,Tapan Kumar Nath</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>L</td>
+<td>0</td>
+<tr><td>PH60012</td>
+<td>SCIENCE &amp; TECHNOLOGY OF NANOMATERIALS</td>
+<td>Dipak Kumar Goswami,Bhupendra Nath Dev</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>C230</td>
+<tr><td>PH60014</td>
+<td>SOLID STATE DEVICES</td>
+<td>Amal Kumar Das</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>C230</td>
+<tr><td>PH60030</td>
+<td>NON- LINEAR OPTICS</td>
+<td>Samudra Roy</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>C226</td>
+<tr><td>PH60031</td>
+<td>ADVANCED CLASSICAL PHYSICS</td>
+<td>Sandipan Sengupta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>F233</td>
+<tr><td>PH60032</td>
+<td>LASER SPECTROSCOPY</td>
+<td>Anushree Roy</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>F234</td>
+<tr><td>PH60033</td>
+<td>ADVANCED COMPUTATIONAL PHYSICS</td>
+<td>Sudhansu Sekhar Mandal</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>F234</td>
+<tr><td>PH60044</td>
+<td>HIGH ENERGY PHYSICS</td>
+<td>Tirtha Sankar Ray</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>F233</td>
+<tr><td>PH60048</td>
+<td>MAGNETIC AND SUPERCONDUCTING PROPERTIES OF SOLIDS</td>
+<td>Debraj Choudhury</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>C230</td>
+<tr><td>PH60050</td>
+<td>THIN FILM TECHNOLOGY</td>
+<td>Achintya Dhar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>C230</td>
+<tr><td>PH60054</td>
+<td>RANDOM MATRIX THEORY AND APPLICATION</td>
+<td>Pragya Shukla</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>C226</td>
+<tr><td>PH60105</td>
+<td>SEMICONDUCTOR PHYSICS</td>
+<td>Tapan Kumar Nath</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>C231</td>
+<tr><td>PH60204</td>
+<td>PHYSICS &amp; TECHNOLOGY OF LASERS</td>
+<td>Shivakiran B N Bhaktha</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>C230</td>
+<tr><td>PH60307</td>
+<td>PHYSICAL COSMOLOGY</td>
+<td>Somnath Bharadwaj</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>C226</td>
+<tr><td>PH60308</td>
+<td>GENERAL THEORY OF RELATIVITY</td>
+<td>Sandipan Sengupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>F233</td>
+<tr><td>PH60309</td>
+<td>ADVANCED TOPICS IN FIELD THEORY AND GRAVITATION</td>
+<td>Sayan Kar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>C226</td>
+<tr><td>PH60402</td>
+<td>BIOPHYSICS</td>
+<td>Amar Nath Gupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>C231</td>
+<tr><td>PH61012</td>
+<td>PHYSICS OF SURFACES AND INTERFACES</td>
+<td>Sanjeev Kumar Srivastava</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>C230</td>
+<tr><td>PH68002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Partha Roy Chaudhuri</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>N</td>
+<td>C230</td>
+<tr><td>PH69002</td>
+<td>SEMINAR-II</td>
+<td>Partha Roy Chaudhuri</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>F233</td>
+<tr><td>PH69004</td>
+<td>LABORATORY</td>
+<td>Dipak Kumar Goswami,Amreesh Chandra</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>0</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

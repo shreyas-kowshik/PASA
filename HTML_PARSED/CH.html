@@ -1,0 +1,329 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : CH</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>CH21004</td>
+<td>HEAT TRANSFER</td>
+<td>Jayanta Chakraborty,Arnab Atta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>NC333,NC333</td>
+<tr><td>CH21008</td>
+<td>CHEMICAL ENGINEERING THERMODYNAMICS</td>
+<td>Parag Arvind Deshpande,Gargi Das</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>NC333,NC333</td>
+<tr><td>CH29006</td>
+<td>FLUID FLOW LABORATORY AND DESIGN</td>
+<td>Amar Nath Samanta,Somenath Ganguly,Sirshendu De,Gautam Kundu</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, L</td>
+<td>Fluid Flow Lab#Room 310</td>
+<tr><td>CH29008</td>
+<td>FUEL LABORATORY</td>
+<td>Saikat Chakraborty,Narayan Chandra Pradhan,Subhabrata Ray,Sonali Sengupta</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J, N</td>
+<td>Energy Lab</td>
+<tr><td>CH30012</td>
+<td>TRANSPORT PHENOMENA</td>
+<td>Sunando Dasgupta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>NC141</td>
+<tr><td>CH30014</td>
+<td>CHEMICAL PROCESS TECHNOLOGY</td>
+<td>Subhabrata Ray</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NC244</td>
+<tr><td>CH30016</td>
+<td>COMPUTER AIDED PROCESS ENGINEERING</td>
+<td>Sudipto Chakraborty</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NC244</td>
+<tr><td>CH31010</td>
+<td>MASS TRANSFER II</td>
+<td>Jayanta Chakraborty</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NC244</td>
+<tr><td>CH39006</td>
+<td>MASS TRANSFER LABORATORY</td>
+<td>Harikrishnan G,Swati  Neogi,Debasis Sarkar,Bhim Charan Meikap,Sunando Dasgupta,Narayan Chandra Pradhan,Gargi Das</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, J, L, N</td>
+<td>Unit Operation Lab</td>
+<tr><td>CH39020</td>
+<td>INSTRUMENTATION AND PROCESS CONTROL LABORATORY</td>
+<td>Amar Nath Samanta,Parag Arvind Deshpande,Debasis Sarkar,Sonali Sengupta</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, N</td>
+<td>IPC Lab</td>
+<tr><td>CH39022</td>
+<td>PROCESS EQUIPMENT DESIGN-II</td>
+<td>Jayanta Kumar Basu,Gargi Das,Subhabrata Ray,Gautam Kundu</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J, L</td>
+<td>Prof. A.N. Roy Seminar Hall</td>
+<tr><td>CH42006</td>
+<td>COMPUTER METHODS IN CHEM. ENGG.</td>
+<td>Amiya Kumar Jana</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NC431</td>
+<tr><td>CH42014</td>
+<td>FUEL TECHNOLOGY</td>
+<td>Sonali Sengupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>Room 310</td>
+<tr><td>CH47024</td>
+<td>PROJECT-II</td>
+<td>Arnab Atta</td>
+<td>0-0-9</td>
+<td>6</td>
+<td>--</td>
+<tr><td>CH48014</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Arnab Atta</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>CH57004</td>
+<td>M.TECH. PROJECT II</td>
+<td>Parag Arvind Deshpande</td>
+<td>0-0-0</td>
+<td>13</td>
+<td>--</td>
+<tr><td>CH58002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Parag Arvind Deshpande</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>CH60016</td>
+<td>FUNDAMENTALS OF BIOENERGY</td>
+<td>Saikat Chakraborty</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>Prof. A.N. Roy Seminar Hall</td>
+<tr><td>CH61012</td>
+<td>ADVANCED MASS TRANSFER</td>
+<td>Somenath Ganguly,Harikrishnan G</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NC431,NC431</td>
+<tr><td>CH61014</td>
+<td>ADVANCED HEAT TRANSFER</td>
+<td>Debasis Sarkar,Rabibrata Mukherjee</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, A3</td>
+<td>NC431,NC431</td>
+<tr><td>CH61016</td>
+<td>PROCESS DYNAMICS &amp; CONTROL</td>
+<td>Amiya Kumar Jana,Amar Nath Samanta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>NC431,NC431</td>
+<tr><td>CH62008</td>
+<td>NOVEL SEPARATION PROCESSES</td>
+<td>Sirshendu De</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>Room 314</td>
+<tr><td>CH62010</td>
+<td>PETROCHEMICAL TECHNOLOGY</td>
+<td>Narayan Chandra Pradhan</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>Room 314</td>
+<tr><td>CH62016</td>
+<td>CHEMICAL REACTOR ANALYSIS</td>
+<td>Jayanta Kumar Basu</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>Room 311</td>
+<tr><td>CH62028</td>
+<td>PROJECT ENGINEERING AND MANAGEMENT</td>
+<td>Sudarsan Neogi</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>Room 311</td>
+<tr><td>CH62046</td>
+<td>MANUFACTURING &amp; CHARACTERISATION OF POLYMER MATRIX COMPOSITES</td>
+<td>Swati  Neogi</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, B3</td>
+<td>Room 312</td>
+<tr><td>CH62050</td>
+<td>HAZARDOUS WASTE TREATMENT &amp; MANAGEMENT</td>
+<td>Bhim Charan Meikap</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>Room 312</td>
+<tr><td>CH62052</td>
+<td>INSTABILITY &amp; PATTERNING IN THIN POLYMER FILM</td>
+<td>Rabibrata Mukherjee</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>Room 312</td>
+<tr><td>CH67102</td>
+<td>THESIS PART-II</td>
+<td>Saikat Chakraborty</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>CH68101</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Sonali Sengupta</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>CH69002</td>
+<td>SEMINAR-II</td>
+<td>Swati  Neogi,Sudarsan Neogi,Gautam Kundu</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, N</td>
+<td>Prof. A.N. Roy Seminar Hall</td>
+<tr><td>CH69004</td>
+<td>DESIGN II</td>
+<td>Parag Arvind Deshpande,Sudipto Chakraborty</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>CAPE Lab</td>
+<tr><td>CH70002</td>
+<td>TRANSPORT IN POROUS MEDIA</td>
+<td>Somenath Ganguly</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>Room 312</td>
+<tr><td>CH71002</td>
+<td>COMPUTATIONAL MODELING OF MULTIPHASE REACTIVE FLOWS</td>
+<td>Arnab Atta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, B3</td>
+<td>Room 311</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

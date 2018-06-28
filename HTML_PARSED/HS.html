@@ -1,0 +1,548 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : HS</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>HS00002</td>
+<td>PREPARATORY ENGLISH</td>
+<td>Jayashree Chakraborty,Priyadarshi Patnaik,H S Komalesha,Saswat Samay Das</td>
+<td>4-1-0</td>
+<td>5</td>
+<td>--</td>
+<tr><td>HS13001</td>
+<td>ENGLISH FOR COMMUNICATION</td>
+<td>Jayashree Chakraborty,Priyadarshi Patnaik,Anjali Roy,H S Komalesha,Saswat Samay Das</td>
+<td>3-0-2</td>
+<td>4</td>
+<td>--</td>
+<tr><td>HS20001</td>
+<td>ECONOMICS</td>
+<td>Bimal Kishore Sahoo,Narayan Chandra Nayak,Kishor Goswami</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NR322,NR421,NR422,NR322,NR421,NR422,NR322,NR421,NR422</td>
+<tr><td>HS20002</td>
+<td>GENERAL PSYCHOLOGY</td>
+<td>Rishabh Rai</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NR323</td>
+<tr><td>HS20004</td>
+<td>POSITIVE PSYCHOLOGY</td>
+<td>Rabindra Kumar Pradhan,Kailash Bihari Lal Srivastava</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NR324,NR324</td>
+<tr><td>HS20006</td>
+<td>MICRO ECONOMICS-II</td>
+<td>Anwesha Aditya</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS20008</td>
+<td>MACRO ECONOMICS-II</td>
+<td>Narayan Chandra Nayak</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS20009</td>
+<td>DEVELOPMENT ECONOMICS</td>
+<td>Kishor Goswami</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS20014</td>
+<td>ECONOMICS OF SUSTIANABLE DEVELOPMENT</td>
+<td>Bhagirath Behera</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS20016</td>
+<td>ENVIRONMENTAL HUMANITIES</td>
+<td>Jenia Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NR124</td>
+<tr><td>HS20018</td>
+<td>SANSKRIT AND HERITAGE</td>
+<td>Anuradha Choudry</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NR224</td>
+<tr><td>HS30002</td>
+<td>COMPARATIVE DEVELOPMENT PERSPECTIVE</td>
+<td>Bhagirath Behera</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS30033</td>
+<td>ECONOMETRIC ANALYSIS</td>
+<td>Sree Vinutha Venkataraman</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NR123</td>
+<tr><td>HS30045</td>
+<td>SPEAKING AND PRESENTATION</td>
+<td>Seema Singh</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NC231</td>
+<tr><td>HS30047</td>
+<td>FRENCH</td>
+<td>Anuradha Choudry</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NR324</td>
+<tr><td>HS30048</td>
+<td>GERMAN</td>
+<td>Vijai Nath Giri</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS30066</td>
+<td>VISUAL COMMUNICATION</td>
+<td>Priyadarshi Patnaik</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NC343</td>
+<tr><td>HS30070</td>
+<td>INTRODUCTION TO ETHICS</td>
+<td>Chhanda Chakraborti</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NR124</td>
+<tr><td>HS30074</td>
+<td>SCIENCE AND HUMANISM</td>
+<td>Jenia Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NR424</td>
+<tr><td>HS30075</td>
+<td>MODERNISATION AND CREATIVE COMMUNICATION</td>
+<td>Saswat Samay Das</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NC332</td>
+<tr><td>HS30095</td>
+<td>GLOBALISATION AND CULTURE</td>
+<td>Anjali Roy</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NR123</td>
+<tr><td>HS30096</td>
+<td>MARKET MICRO STRUCTURE</td>
+<td>Gourishankar S Hiremath</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS31082</td>
+<td>MONETARY ECONOMICS</td>
+<td>Siddhartha Chattopadhyay</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS38002</td>
+<td>SEMINAR</td>
+<td>Gourishankar S Hiremath</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>--</td>
+<tr><td>HS40072</td>
+<td>SOCIOLOGY OF  SCIENCE</td>
+<td>Suhita Chopra Chaterjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NR124</td>
+<tr><td>HS40078</td>
+<td>INTERNATIONAL TRADE</td>
+<td>Anwesha Aditya</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>LANGUAGE LAB-II (JCB LAB COMPLEX)</td>
+<tr><td>HS40085</td>
+<td>LABOUR ECONOMICS</td>
+<td>Bimal Kishore Sahoo</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NR223</td>
+<tr><td>HS41002</td>
+<td>ECONOMETRIC ANALYSIS I</td>
+<td>Pulak Mishra</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS41004</td>
+<td>BANKING THEORY AND PRACTICE</td>
+<td>Jitendra Mahakud</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS49002</td>
+<td>ECONOMETRIC ANALYSIS I LAB.</td>
+<td>Pulak Mishra</td>
+<td>0-0-2</td>
+<td>1</td>
+<td>X4, N</td>
+<td>ECONOMICS LAB</td>
+<tr><td>HS50017</td>
+<td>EQUITY RESEARCH</td>
+<td>Jitendra Mahakud</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS50018</td>
+<td>FIXED INCOME SECURITIES</td>
+<td>Gourishankar S Hiremath</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS50020</td>
+<td>ECONOMICS OF INSURANCE</td>
+<td>Inder Sekhar Yadav</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS50021</td>
+<td>APPLIED ECONOMETRICS</td>
+<td>Siddhartha Chattopadhyay</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>NC334</td>
+<tr><td>HS50030</td>
+<td>GENERAL EQUILIBRIUM AND WELFARE ECONOMICS</td>
+<td>Zakir Husain</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS51001</td>
+<td>FIXED INCOME SECURITIES AND INTEREST RATE DERIVATIVES</td>
+<td>Gourishankar S Hiremath</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS51637</td>
+<td>SOCIETY SCIENCE AND TECHNOLOGY</td>
+<td>Suhita Chopra Chaterjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS57004</td>
+<td>PROJECT &amp; PROJECT SEMINAR</td>
+<td>Pulak Mishra,Anwesha Aditya</td>
+<td>0-0-0</td>
+<td>10</td>
+<td>--</td>
+<tr><td>HS58001</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Anwesha Aditya</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>HS59001</td>
+<td>APPLIED ECONOMETRICS LABORATORY</td>
+<td>Siddhartha Chattopadhyay</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>PC-Lab-II (CIC)</td>
+<tr><td>HS60002</td>
+<td>MANPOWER ECONOMICS</td>
+<td>Inder Sekhar Yadav</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60008</td>
+<td>HUMAN RESOURCE SYSTEMS</td>
+<td>Kailash Bihari Lal Srivastava</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60009</td>
+<td>FINANCIAL MANAGEMENT</td>
+<td>Sree Vinutha Venkataraman</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NR323</td>
+<tr><td>HS60010</td>
+<td>INDUSTRIAL RELATIONS</td>
+<td>Kailash Bihari Lal Srivastava</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS60012</td>
+<td>RESEARCH METHODOLOGY</td>
+<td>Damodar Suar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>V3</td>
+<tr><td>HS60014</td>
+<td>EMOTIONAL INTELLIGENCE AT WORK</td>
+<td>Rabindra Kumar Pradhan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>E2</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60016</td>
+<td>PERFORMANCE MANAGEMENT</td>
+<td>Rishabh Rai</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>A2</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60020</td>
+<td>MATHEMATICAL ECONOMICS</td>
+<td>Zakir Husain</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>H3</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS60022</td>
+<td>INTERNATIONAL HRM</td>
+<td>Rabindra Kumar Pradhan</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60042</td>
+<td>INTRODUCTION TO GROSS NATIONAL HAPPINESS (GNH)</td>
+<td>Manas Kumar Mandal,Saamdu Chetri,Priyadarshi Patnaik</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC141,NC141,NC141</td>
+<tr><td>HS60044</td>
+<td>HISTORY OF SCIENCE AND TECHNOLOGY IN ANCIENT INDIA</td>
+<td>Jenia Mukherjee,Vijai Nath Giri,Anuradha Choudry</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>NC141,NC141,NC141</td>
+<tr><td>HS60046</td>
+<td>INTERPERSONAL COMMUNICATION</td>
+<td>Vijai Nath Giri</td>
+<td>2-0-3</td>
+<td>4</td>
+<td>C4</td>
+<td>LANGUAGE LAB - III (JCB LAB COMPLEX)</td>
+<tr><td>HS60066</td>
+<td>BUSINESS  SOCIETY AND  ETHICS</td>
+<td>Chhanda Chakraborti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60070</td>
+<td>HUMAN RESOURCE INFORMATION SYSTEM</td>
+<td>Kailash Bihari Lal Srivastava</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>H2</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60072</td>
+<td>KNOWLEDGE MANAGEMENT</td>
+<td>Rishabh Rai</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>F2</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS60074</td>
+<td>STRATEGIC HRM</td>
+<td>Rabindra Kumar Pradhan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>I2</td>
+<td>LANGUAGE LAB (Department of HSS)</td>
+<tr><td>HS60076</td>
+<td>COMPENSATION MANAGEMENT</td>
+<td>Damodar Suar</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>B2</td>
+<td>PSYCHOLOGY LAB</td>
+<tr><td>HS62002</td>
+<td>SCIENCE OF HAPPINESS AND WELL-BEING</td>
+<td>Manas Kumar Mandal,Damodar Suar,Srikant Annavarapu,Rajlakshmi Guha,Tuheena Mukherjee,Vijai Nath Giri,Priyadarshi Patnaik,Susmita Mukhopadhyay,Sangeeta Das Bhattacharya</td>
+<td>2-0-2</td>
+<td>3</td>
+<td>D4</td>
+<td>NC442</td>
+<tr><td>HS62004</td>
+<td>MEASUREMENT OF HAPPINESS</td>
+<td>Manas Kumar Mandal,Rajlakshmi Guha,Aurobinda Routray,Damodar Suar</td>
+<td>2-0-2</td>
+<td>3</td>
+<td>S3, B3</td>
+<td>NR423,NR423</td>
+<tr><td>HS63002</td>
+<td>ENGLISH FOR TECHNICAL WRITING</td>
+<td>Jayashree Chakraborty</td>
+<td>2-2-0</td>
+<td>4</td>
+<td>U4</td>
+<td>V1</td>
+<tr><td>HS67202</td>
+<td>PROJECT</td>
+<td>Rishabh Rai,Kailash Bihari Lal Srivastava</td>
+<td>0-0-5</td>
+<td>5</td>
+<td>--</td>
+<tr><td>HS68004</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Damodar Suar,Kailash Bihari Lal Srivastava</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>HS70001</td>
+<td>HISTORY OF AMERICAN LITERATURE</td>
+<td>Seema Singh</td>
+<td>0-4-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>HS70005</td>
+<td>POST-COLONIAL TEXTS AND THEORY</td>
+<td>H S Komalesha</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>HS70006</td>
+<td>PRINCIPLES OF LITERARY CRITICISM</td>
+<td>Seema Singh</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>HS70007</td>
+<td>LITERATURES IN ENGLISH</td>
+<td>H S Komalesha</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

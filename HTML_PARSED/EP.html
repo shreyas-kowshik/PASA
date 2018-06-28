@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<link href="./css/style.css" rel="Stylesheet"/>
+<title>Error Page</title>
+<script type="text/javascript">
+        
+
+    var _win = null;
+    function openDetails(){
+        if(_win==null || _win.closed){
+            var url = "error_page.jsp?error_message=500 Internal Server ,detail_message= The server encountered an unexpected condition which prevented it from fulfilling the request.&zoom_mode=Y";
+            _win = window.open(url,'_win','height='+screen.availHeight+'px,width='+screen.availWidth+'px,scrollbar=yes,resizable=no,menubar=no,,statusbar=no');
+            //_win.document.write(window.document.body.innerHTML);
+            //_win.document.getElementById('tab_id').style.display = 'none';
+        }
+        else _win.focus();
+        }
+</script>
+</head>
+<body>
+<table border="0" cellpadding="10" cellspacing="10" width="100%">
+<tr>
+<td><font color="red">500 Internal Server </font></td>
+</tr>
+<tr>
+<td> The server encountered an unexpected condition which prevented it from fulfilling the request.</td>
+</tr>
+<tr>
+<td>The page may be under maintenance or stopped responding temporarily. You should wait for a while to get it work, or make a complaint regarding to this screen and it will go to corresponding administrator. You can reset the application and start it from the begining.</td>
+</tr>
+</table>
+</body>
+</html>

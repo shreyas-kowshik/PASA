@@ -1,0 +1,389 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : BM</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>BM40002</td>
+<td>INTRODUCTION TO FINANCIAL MANAGEMENT</td>
+<td>Chandra Sekhar Mishra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC243</td>
+<tr><td>BM40004</td>
+<td>INTRODUCTION TO HUMAN BEHAVIOUR IN ORGANISATION</td>
+<td>Sangeeta Sahney,Tuheena Mukherjee,Susmita Mukhopadhyay</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC344</td>
+<tr><td>BM40006</td>
+<td>FINANCIAL RISK MODELING</td>
+<td>Parama Barai</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td></td>
+<tr><td>BM40009</td>
+<td>MARKETING MANAGEMENT</td>
+<td>Srabanti Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC341</td>
+<tr><td>BM40012</td>
+<td>DERIVATIVES AND RISK MANAGEMENT</td>
+<td>Sujoy Bhattacharya</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td></td>
+<tr><td>BM49002</td>
+<td>FINANCIAL ANALYTICS</td>
+<td>Parama Barai</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td></td>
+<tr><td>BM50010</td>
+<td>COMMODITY DERIVATIVES AND PRICE RISK MODELLING</td>
+<td>Prabina Rajib</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM51002</td>
+<td>MARKET MICROSTRUCTURE</td>
+<td>Arun Kumar Misra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM60012</td>
+<td>STRATEGIC  MANAGEMENT</td>
+<td>Biplab Datta,Sanjib Chowdhury</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60014</td>
+<td>PURCHASING AND OUTSOURCING</td>
+<td>Kunal Kanti Ghosh</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60022</td>
+<td>INTERNATIONAL ECONOMICS</td>
+<td>Barnali Nag</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60066</td>
+<td>MANUFACTURING STRATEGY</td>
+<td>Pranab Kumar Dan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60088</td>
+<td>SOFTWARE PROJECT MANAGEMENT</td>
+<td>Saini Das,SWARUP MANDAL</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60100</td>
+<td>ORGANIZATIONAL LEADERSHIP</td>
+<td>Biplab Datta,Tuheena Mukherjee,Susmita Mukhopadhyay</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>A2</td>
+<td>0</td>
+<tr><td>BM60102</td>
+<td>BUSINESS ETHICS</td>
+<td>Tuheena Mukherjee,Susmita Mukhopadhyay</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>B2</td>
+<td>0</td>
+<tr><td>BM60112</td>
+<td>CORPORATE FINANCE AND FINANCIAL ACCOUNTING</td>
+<td>Abhijeet     Chandra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td></td>
+<tr><td>BM60114</td>
+<td>MARKETING ANALYTICS</td>
+<td>Swagato Chatterjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM60116</td>
+<td>MODELLING IN OPERATIONS MANAGEMENT</td>
+<td>Amit Upadhyay</td>
+<td>4-0-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>BM60118</td>
+<td>ANALYTICS FOR VENTURES / VENTURE ANALYTICS</td>
+<td>Prabha Bhola</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60122</td>
+<td>BUSINESS ACCOUNTING &amp; BANKING ANALYTICS</td>
+<td>Arun Kumar Misra,Chandra Sekhar Mishra</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60134</td>
+<td>PRODUCT ANALYTICS</td>
+<td>PRALAY PAL,Kunal Kanti Ghosh,Pranab Kumar Dan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60136</td>
+<td>SUPPLY CHAIN ANALYTICS</td>
+<td>ANUPAM GHOSH,Kunal Kanti Ghosh</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM60148</td>
+<td>ADVANCED BUSINESS ANALYTICS</td>
+<td>Sujoy Bhattacharya</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61002</td>
+<td>CORPORATE FINANCE</td>
+<td>Abhijeet     Chandra,Arun Kumar Misra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>0</td>
+<tr><td>BM61004</td>
+<td>BUSINESS RESEARCH METHODS</td>
+<td>Ranjan Chaudhuri,Rudra Prakash Pradhan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>C2</td>
+<td>0</td>
+<tr><td>BM61006</td>
+<td>BUSINESS, GOVERNMENT &amp; INTERNATIONAL ECONOMIC ENVIRONMENT</td>
+<td>Barnali Nag</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>B2</td>
+<td>0</td>
+<tr><td>BM61008</td>
+<td>HUMAN RESOURCE MANAGEMENT</td>
+<td>Susmita Mukhopadhyay,Tuheena Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>0</td>
+<tr><td>BM61010</td>
+<td>STRATEGIC MANAGEMENT</td>
+<td>Biplab Datta,Sanjib Chowdhury</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>0</td>
+<tr><td>BM61012</td>
+<td>PRODUCTION &amp; OPERATION MANAGEMENT</td>
+<td>Amit Upadhyay,GAUTAM SENGUPTA</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>D3</td>
+<td>0</td>
+<tr><td>BM61015</td>
+<td>IT &amp; BUSINESS APPLICATIONS LABORATORY</td>
+<td>Saini Das</td>
+<td>1-0-3</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM61018</td>
+<td>MARKETING II</td>
+<td>Srabanti Mukherjee</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>A2</td>
+<td>0</td>
+<tr><td>BM61020</td>
+<td>WRITTEN BUSINESS COMMUNICATION</td>
+<td>Aradhna Malik</td>
+<td>1-0-3</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61070</td>
+<td>E-COMMERCE TECHNOLOGY &amp; APPLICATION</td>
+<td>Saini Das</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61101</td>
+<td>COMMODITY DERIVATIVES &amp; RISK MANAGEMENT</td>
+<td>Prabina Rajib</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61102</td>
+<td>CONSUMER BEHAVIOUR ANALYSIS</td>
+<td>Sangeeta Sahney</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61110</td>
+<td>SALES &amp; DISTRIBUTION MANAGEMENT</td>
+<td>BISWARUP GHOSH,Sangeeta Sahney</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61112</td>
+<td>SERVICES MARKETING</td>
+<td>Sangeeta Sahney</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61114</td>
+<td>RETAIL MARKETING</td>
+<td>Ranjan Chaudhuri</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61134</td>
+<td>SIX SIGMA</td>
+<td>RABINDRANATH BHATTACHARYA,Kunal Kanti Ghosh</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM61168</td>
+<td>MERGERS, ACQUISITION &amp; CORPORATE RESTRUCTURING</td>
+<td>Chandra Sekhar Mishra</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM61178</td>
+<td>INFRASTRUCTURE &amp; PROJECT FINANCE</td>
+<td>Rudra Prakash Pradhan</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM62002</td>
+<td>HUMAN RESOURCE MEASUREMENT AND DECISIONS</td>
+<td>Tuheena Mukherjee,Susmita Mukhopadhyay</td>
+<td>2-0-2</td>
+<td>3</td>
+<td>--</td>
+<tr><td>BM62004</td>
+<td>BANKING AND FINANCIAL MARKETS ANALYTICS</td>
+<td>Arun Kumar Misra</td>
+<td>1-0-2</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM68002</td>
+<td>COMPREHENSIVE VIVA</td>
+<td>Arun Kumar Misra,Abhijeet     Chandra,Aradhna Malik,Kunal Kanti Ghosh,Parama Barai,Susmita Mukhopadhyay,Barnali Nag,Biplab Datta,Chandra Sekhar Mishra,Srabanti Mukherjee,Tuheena Mukherjee,Sujoy Bhattacharya,Amit Upadhyay,Saini Das,Prabina Rajib,Rudra Prakash Pradhan,Sangeeta Sahney</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM69006</td>
+<td>DATA SCIENCE LABORATORY</td>
+<td>Sujoy Bhattacharya</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>--</td>
+<tr><td>BM69028</td>
+<td>APPLIED MANAGEMENT RESEARCH PROJECT</td>
+<td>Arun Kumar Misra,Abhijeet     Chandra,Aradhna Malik,Kunal Kanti Ghosh,Parama Barai,Susmita Mukhopadhyay,Barnali Nag,Biplab Datta,Srabanti Mukherjee,Chandra Sekhar Mishra,Tuheena Mukherjee,Sujoy Bhattacharya,Amit Upadhyay,Saini Das,Prabina Rajib,Rudra Prakash Pradhan,Sangeeta Sahney</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>--</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

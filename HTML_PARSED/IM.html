@@ -1,0 +1,428 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : IM</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>IM21002</td>
+<td>PRODUCTION DESIGN AND PROCESS PLANNING</td>
+<td>Pradip Kumar Ray</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>ISE-E1</td>
+<tr><td>IM21006</td>
+<td>OPERATIONS RESEARCH-II</td>
+<td>Mamata Jenamani</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>ISE-E1</td>
+<tr><td>IM21008</td>
+<td>WORK SYSTEM DESIGN</td>
+<td>Goutam Sen,O. Bala Krishna</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM29006</td>
+<td>OPERATIONS RESEARCH LAB.</td>
+<td>Sri Krishna Kumar</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>Design for Manufacturing and Assembly Lab</td>
+<tr><td>IM29008</td>
+<td>WORK SYSTEM DESIGN LAB.</td>
+<td>Goutam Sen,O. Bala Krishna</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, X4</td>
+<td>WSD Lab</td>
+<tr><td>IM31002</td>
+<td>QUALITY ENGINEERING</td>
+<td>Jitesh J Thakkar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM31006</td>
+<td>SIMULATION</td>
+<td>V N Achutha Naikan,Biswajit Mahanty</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>ISE-E1</td>
+<tr><td>IM31010</td>
+<td>MANAGEMENT OF INVENTORY SYSTEMS</td>
+<td>Pradip Kumar Ray</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>ISE-E1</td>
+<tr><td>IM31012</td>
+<td>OPTIMISATION AND HEURISTIC METHODS</td>
+<td>Manoj Kumar Tiwari</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>ISE-E1</td>
+<tr><td>IM31014</td>
+<td>DESIGN FOR ASSEMBLY AND AUTOMATION</td>
+<td>Manoj Kumar Tiwari</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>ISE-C3</td>
+<tr><td>IM37004</td>
+<td>DESIGN FOR MANUFACTURABILITY AND ASSEMBLY PROJECT</td>
+<td>Jyoti Mukherjee</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>L</td>
+<td>Design for Manufacturing and Assembly Lab</td>
+<tr><td>IM39003</td>
+<td>OPTIMISATION AND HEURISTIC METHODS PROJECT</td>
+<td>Manoj Kumar Tiwari</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>Design for Manufacturing and Assembly Lab</td>
+<tr><td>IM39006</td>
+<td>SIMULATION LAB.</td>
+<td>Goutam Sen</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P</td>
+<td>Design for Manufacturing and Assembly Lab</td>
+<tr><td>IM40001</td>
+<td>INTRODUCTION TO INDUSTRIAL SAFETY</td>
+<td>Jhareswar Maiti</td>
+<td>2-0-0</td>
+<td>2</td>
+<td>U2</td>
+<td>ISE-E1</td>
+<tr><td>IM41082</td>
+<td>OPERATIONS RESEARCH</td>
+<td>Jitendra Kumar Jha,Sri Krishna Kumar</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC242, NC244</td>
+<tr><td>IM47001</td>
+<td>PROJECT-I</td>
+<td>Jhareswar Maiti</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>--</td>
+<tr><td>IM47004</td>
+<td>PROJECT-II</td>
+<td>Sarada Prasad Sarmah</td>
+<td>0-0-9</td>
+<td>6</td>
+<td>--</td>
+<tr><td>IM48002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Sarada Prasad Sarmah</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>IM48003</td>
+<td>SUMMER TRAINING</td>
+<td>Jitesh J Thakkar</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>IM57003</td>
+<td>PROJECT - III</td>
+<td>Jitesh J Thakkar</td>
+<td>0-0-18</td>
+<td>12</td>
+<td>--</td>
+<tr><td>IM57004</td>
+<td>PROJECT - IV</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-20</td>
+<td>13</td>
+<td>--</td>
+<tr><td>IM58004</td>
+<td>COMPREHENSIVEVIVA VOCE</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>IM60002</td>
+<td>ADVANCED DECISION MODELLING</td>
+<td>Akhilesh Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM60004</td>
+<td>SYSTEMS MODELING AND ANALYSIS</td>
+<td>Biswajit Mahanty</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>ISE-C3</td>
+<tr><td>IM60006</td>
+<td>LOGISTICS SYSTEMS AND MANAGEMENT</td>
+<td>Sarada Prasad Sarmah</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>ISE-C3</td>
+<tr><td>IM60008</td>
+<td>WEB DATA ANALYTICS WITH APPLICATIONS</td>
+<td>Mamata Jenamani</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>ISE-E1</td>
+<tr><td>IM60014</td>
+<td>NETWORKS AND PROJECT MANAGEMENT</td>
+<td>Jitesh J Thakkar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>ISE-C2</td>
+<tr><td>IM60016</td>
+<td>PRODUCTION DESIGN AND PROCESS PLANNING</td>
+<td>Pradip Kumar Ray</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>ISE-E1</td>
+<tr><td>IM60024</td>
+<td>ADVANCED PRODUCTION PLANNING &amp; INVENTORY CONTROL</td>
+<td>Sarada Prasad Sarmah</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>ISE-C3</td>
+<tr><td>IM60056</td>
+<td>APPLIED MULTIVARIATE STATISTICAL MODELLING - II</td>
+<td>Akhilesh Kumar</td>
+<td>4-0-0</td>
+<td>4</td>
+<td>D4</td>
+<td>ISE-C2</td>
+<tr><td>IM60062</td>
+<td>SIX SIGMA FUNDAMENTALS &amp; APPLICATIONS</td>
+<td>Jyoti Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>ISE-E1</td>
+<tr><td>IM60068</td>
+<td>GAME THEORY AND APPLICATIONS</td>
+<td>Sri Krishna Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM61004</td>
+<td>QUALITY ENGINEERING</td>
+<td>Jitesh J Thakkar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM61020</td>
+<td>SAFETY ANALYTICS</td>
+<td>Jhareswar Maiti,O. Bala Krishna</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>IM61026</td>
+<td>FACILITY LAYOUT AND DESIGN</td>
+<td>Jitendra Kumar Jha</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>ISE-C2</td>
+<tr><td>IM67003</td>
+<td>PROJECT</td>
+<td>Jhareswar Maiti</td>
+<td>0-0-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>IM67102</td>
+<td>THESIS PART-II</td>
+<td>Jitendra Kumar Jha</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>IM68101</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Goutam Sen</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>IM69002</td>
+<td>SEMINAR-II</td>
+<td>Jyoti Mukherjee</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>ISE-C3</td>
+<tr><td>IM69004</td>
+<td>INFORMATION SYSTEMS PROJECT</td>
+<td>Mamata Jenamani</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>Comp Lab1</td>
+<tr><td>IM70001</td>
+<td>DESIGN AND ANALYSIS OF EXPERIMENTS</td>
+<td>Jhareswar Maiti</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>QEDM-Seminar Room</td>
+<tr><td>QE47002</td>
+<td>INTERNSHIP</td>
+<td>Jitesh J Thakkar</td>
+<td>0-0-0</td>
+<td>12</td>
+<td>--</td>
+<tr><td>QE48002</td>
+<td>COMPREHENSIVE VIVA</td>
+<td>Sarada Prasad Sarmah</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>QE57001</td>
+<td>PROJECT(PG - 1)</td>
+<td>Jhareswar Maiti,Jitendra Kumar Jha</td>
+<td>0-0-15</td>
+<td>10</td>
+<td>--</td>
+<tr><td>QE57002</td>
+<td>PROJECT(PG - 2)</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-18</td>
+<td>12</td>
+<td>--</td>
+<tr><td>QE58002</td>
+<td>COMPREHENSIVE VIVA</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>QM47002</td>
+<td>INTERNSHIP</td>
+<td>Jitesh J Thakkar</td>
+<td>0-0-0</td>
+<td>12</td>
+<td>--</td>
+<tr><td>QM48002</td>
+<td>COMPREHENSIVE VIVA</td>
+<td>Sarada Prasad Sarmah</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>QM57002</td>
+<td>PROJECT(PG - 2)</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-18</td>
+<td>12</td>
+<td>--</td>
+<tr><td>QM58002</td>
+<td>COMPREHENSIVE VIVA</td>
+<td>Pradip Kumar Ray</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

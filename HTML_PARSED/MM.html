@@ -1,0 +1,289 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : MM</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>MM60020</td>
+<td>EVIDENCE BASED MEDICINE- II</td>
+<td>SANGEETA DAS BHATTACHARYA</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>0</td>
+<tr><td>MM61202</td>
+<td>MEDICAL TECHNOLOGY,SOCIETY AND ETHICS</td>
+<td>ANALAVA MITRA</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>MM61214</td>
+<td>STEM CELL BIOLOGY AND THERAPY</td>
+<td>Praphulla Chandra Shukla,Nishant Chakravorty</td>
+<td>4-0-0</td>
+<td>4</td>
+<td>U4</td>
+<td>0</td>
+<tr><td>MM61216</td>
+<td>ADVANCED IMMUNOLOGY AND IMMUNOTHERAPEUTICS</td>
+<td>Gayatri Mukherjee</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>0</td>
+<tr><td>MM61312</td>
+<td>MEDICAL IMAGING</td>
+<td>KOEL CHAUDHURY,JYOTIRMOY CHATTERJEE</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>X4</td>
+<td>0</td>
+<tr><td>MM61314</td>
+<td>TRANSLATIONAL HEALTH RESEARCH</td>
+<td>Nishant Chakravorty,Praphulla Chandra Shukla</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>0</td>
+<tr><td>MM61316</td>
+<td>BIOMATERIALS</td>
+<td>SANTANU DHARA</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>0</td>
+<tr><td>MM61318</td>
+<td>MEDICAL ELECTRONICS</td>
+<td>SOUMEN DAS</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>0</td>
+<tr><td>MM61502</td>
+<td>BIOMEDICAL INSTRUMENTATION</td>
+<td>MANJUNATHA MAHADEVAPPA</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>0</td>
+<tr><td>MM61504</td>
+<td>PATTERN RECOGNITION AND MACHINE INTELLIGENCE IN MEDICINE</td>
+<td>CHANDAN CHAKRABORTY</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, A2, H2, U4</td>
+<td>0</td>
+<tr><td>MM61510</td>
+<td>NUCLEAR IMAGING</td>
+<td>KOEL CHAUDHURY</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>MM61514</td>
+<td>MOLECULAR IMAGING</td>
+<td>MANJUNATHA MAHADEVAPPA,SOUMEN DAS,JYOTIRMOY CHATTERJEE</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>G3</td>
+<td>0</td>
+<tr><td>MM61516</td>
+<td>MEDICAL IMAGING LABORATORY</td>
+<td>JYOTIRMOY CHATTERJEE</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>0</td>
+<tr><td>MM61518</td>
+<td>TELEMEDICINE LABORATORY</td>
+<td>MANJUNATHA MAHADEVAPPA</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>L</td>
+<td>0</td>
+<tr><td>MM61520</td>
+<td>SEMINAR-II</td>
+<td>ANALAVA MITRA</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P</td>
+<td>0</td>
+<tr><td>MM61528</td>
+<td>ALTERNATIVE SYSTEMS OF MEDICINE &amp; DRUGS OF NATURAL ORIGIN</td>
+<td>Analava Mitra</td>
+<td>3-0-3</td>
+<td>5</td>
+<td>V4</td>
+<td>0</td>
+<tr><td>MM61801</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>SANTANU DHARA,Nishant Chakravorty,JYOTIRMOY CHATTERJEE,KOEL CHAUDHURY,MAHITOSH MANDAL,SOUMEN DAS</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>R</td>
+<td>0</td>
+<tr><td>MM67001</td>
+<td>PROJECT WORK,DISSERATION AND SEMINAR</td>
+<td>MANJUNATHA MAHADEVAPPA,Nishant Chakravorty,MAHITOSH MANDAL,SANGEETA DAS BHATTACHARYA</td>
+<td>0-0-0</td>
+<td>34</td>
+<td>--</td>
+<tr><td>MM67102</td>
+<td>THESIS PART-II</td>
+<td>SANTANU DHARA,MAHITOSH MANDAL,ANALAVA MITRA,CHANDAN CHAKRABORTY,SANGEETA DAS BHATTACHARYA,SOUMEN DAS,MANJUNATHA MAHADEVAPPA,JYOTIRMOY CHATTERJEE,KOEL CHAUDHURY</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>X</td>
+<td>0</td>
+<tr><td>MM68003</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>MANJUNATHA MAHADEVAPPA,Nishant Chakravorty,MAHITOSH MANDAL</td>
+<td>0-0-0</td>
+<td>6</td>
+<td>--</td>
+<tr><td>MM69320</td>
+<td>MEDICAL ELECTRONICS LAB</td>
+<td>SOUMEN DAS</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>R</td>
+<td>0</td>
+<tr><td>MM69322</td>
+<td>BIOMATERIALS LAB</td>
+<td>SANTANU DHARA</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P</td>
+<td>0</td>
+<tr><td>MM69324</td>
+<td>SEMINAR I</td>
+<td>MAHITOSH MANDAL,CHANDAN CHAKRABORTY</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J</td>
+<td>0</td>
+<tr><td>MM71318</td>
+<td>TOPICS IN CLINICAL ENGINEERING</td>
+<td>Analava Mitra</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>X4</td>
+<td>0</td>
+<tr><td>MM71326</td>
+<td>HEALTHCARE MANAGEMENT</td>
+<td>ANALAVA MITRA,SANGEETA DAS BHATTACHARYA</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>0</td>
+<tr><td>MM71514</td>
+<td>MOLECULAR IMAGING</td>
+<td>JYOTIRMOY CHATTERJEE,SOUMEN DAS</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>G3</td>
+<td>0</td>
+<tr><td>MM72335</td>
+<td>CANCER BIOLOGY</td>
+<td>MAHITOSH MANDAL</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>0</td>
+<tr><td>MM77320</td>
+<td>MINOR PROJECT-II</td>
+<td>MANJUNATHA MAHADEVAPPA,SANTANU DHARA,KOEL CHAUDHURY,SANGEETA DAS BHATTACHARYA</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>P</td>
+<td>0</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

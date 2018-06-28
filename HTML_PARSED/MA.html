@@ -1,0 +1,468 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : MA</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>MA00002</td>
+<td>PREPARATORY  MATHEMATICS II</td>
+<td>T Raja Sekhar,Bappaditya Bhowmik</td>
+<td>4-1-0</td>
+<td>5</td>
+<td>--</td>
+<tr><td>MA10002</td>
+<td>MATHEMATICS-II</td>
+<td>Debapriya Biswas,Rajesh Kannan,Jitendra Kumar,Rupanwita Gayen,Pratima Panigrahi,Koeli Ghoshal,Asish Ganguly,Ramakrishna Nanduri</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>MA20013</td>
+<td>DISCRETE MATHEMATICS</td>
+<td>Ratna Dutta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NR224</td>
+<tr><td>MA20102</td>
+<td>NUMERICAL SOLUTION OF ORDINARY AND PDE</td>
+<td>P V S N Murthy,Rajni Kant Pandey</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NR321,NR321, NR322</td>
+<tr><td>MA20104</td>
+<td>PROBABILITY &amp; STATISTICS</td>
+<td>Swanand Ravindra Khare,Bibhas Adhikari,Buddhananda Banerjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NR221, NR122, NR121</td>
+<tr><td>MA20106</td>
+<td>PROBABILITY &amp; STOCHASTIC PROCESSES</td>
+<td>Umesh Chandra Gupta,Nitin Gupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NR321, NR222</td>
+<tr><td>MA30002</td>
+<td>MODERN ALGEBRA</td>
+<td>Mousumi Mandal</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, G3</td>
+<td>NC241</td>
+<tr><td>MA30006</td>
+<td>SWITCHING &amp; FINITE AUTOMATA</td>
+<td>Ratna Dutta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>NC142</td>
+<tr><td>MA30014</td>
+<td>OPERATION RESEARCH</td>
+<td>Geetanjali Panda</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NC142</td>
+<tr><td>MA30110</td>
+<td>ADVANCED NUMERICAL TECHNIQUES</td>
+<td>Somnath Bhattacharyya</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC331</td>
+<tr><td>MA39014</td>
+<td>OPERATION RESEARCH LABORATORY</td>
+<td>Debjani Chakraborty</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>PC_Lab-II</td>
+<tr><td>MA39110</td>
+<td>NUMERICAL TECHNIQUES LABORATORY</td>
+<td>Somnath Bhattacharyya</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>PC_Lab-II</td>
+<tr><td>MA40002</td>
+<td>INTEGRAL EQUATIONS &amp; VARIATIONAL METHODS</td>
+<td>Rupanwita Gayen</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, G3</td>
+<td>NC142</td>
+<tr><td>MA40004</td>
+<td>FILE ORGANISATION AND  DATA BASE SYSTEMS</td>
+<td>Adrijit Goswami</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td></td>
+<tr><td>MA41002</td>
+<td>MODERN ALGEBRA</td>
+<td>Mousumi Mandal</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, G3</td>
+<td>NC241</td>
+<tr><td>MA41004</td>
+<td>TOPOLOGY</td>
+<td>Gnaneshwar Nelakanti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NC243</td>
+<tr><td>MA41006</td>
+<td>COMPLEX ANALYSIS</td>
+<td>Bappaditya Bhowmik</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N325</td>
+<tr><td>MA41010</td>
+<td>NON LINEAR PROGRAMMING</td>
+<td>Debjani Chakraborty</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>NC241</td>
+<tr><td>MA41011</td>
+<td>THEORY OF OPERATING SYSTEMS</td>
+<td>Dharmendra Kumar Gupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>NC142</td>
+<tr><td>MA41017</td>
+<td>STOCHASTIC PROCESSES</td>
+<td>Nitin Gupta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, H3</td>
+<td>NC142</td>
+<tr><td>MA41022</td>
+<td>PARTIAL DIFFERENTIAL EQUATIONS</td>
+<td>T Raja Sekhar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>N325</td>
+<tr><td>MA41108</td>
+<td>STATISTICAL INFERENCE</td>
+<td>Somesh Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, A3</td>
+<td>N325</td>
+<tr><td>MA49011</td>
+<td>THEORY OF OPERATING SYSTEMS LAB.</td>
+<td>Dharmendra Kumar Gupta,Pawan Kumar</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>PC_Lab-IV</td>
+<tr><td>MA49012</td>
+<td>VIVA VOCE</td>
+<td>Jitendra Kumar</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MA51002</td>
+<td>MEASURE THEORY AND INTEGRATION</td>
+<td>Chandal Nahak</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NC142</td>
+<tr><td>MA51004</td>
+<td>INTEGRAL EQUATIONS AND VARIATIONAL METHODS</td>
+<td>Rupanwita Gayen</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, G3</td>
+<td>NC142</td>
+<tr><td>MA51006</td>
+<td>BOUNDARY ELEMENT METHODS</td>
+<td>G P Raja Sekhar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N322</td>
+<tr><td>MA51014</td>
+<td>TOPOLOGY</td>
+<td>Gnaneshwar Nelakanti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NC243</td>
+<tr><td>MA51108</td>
+<td>ADVANCED COMPLEX ANALYSIS</td>
+<td>Bappaditya Bhowmik</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N325</td>
+<tr><td>MA51122</td>
+<td>NON LINEAR PROGRAMMING</td>
+<td>Debjani Chakraborty</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>0</td>
+<tr><td>MA57012</td>
+<td>PROJECT - PART II</td>
+<td>Debapriya Biswas</td>
+<td>0-0-15</td>
+<td>10</td>
+<td>--</td>
+<tr><td>MA58001</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Debapriya Biswas</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MA58006</td>
+<td>VIVA VOCE</td>
+<td>Bappaditya Bhowmik</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>MA59004</td>
+<td>PROJECT</td>
+<td>Bappaditya Bhowmik</td>
+<td>0-0-15</td>
+<td>10</td>
+<td>--</td>
+<tr><td>MA60002</td>
+<td>DATA STRUCTURE AND ALGORITHM</td>
+<td>Sourav Mukhopadhyay</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NR421</td>
+<tr><td>MA60004</td>
+<td>OPERATING SYSTEMS DESIGN</td>
+<td>Dharmendra Kumar Gupta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>NC142</td>
+<tr><td>MA60024</td>
+<td>COMPUTER NETWORK</td>
+<td>Pawan Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, B3</td>
+<td>NC233</td>
+<tr><td>MA60044</td>
+<td>MULTI-OBJECTIVE PROGRAMMING</td>
+<td>Mahendra Prasad Biswal</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>NC241</td>
+<tr><td>MA60050</td>
+<td>FILE ORGANIZATION AND DATABASE SYSTEMS</td>
+<td>Adrijit Goswami</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NC142</td>
+<tr><td>MA60053</td>
+<td>COMPUTATIONAL LINEAR ALGEBRA</td>
+<td>Swanand Ravindra Khare,Bibhas Adhikari</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>NC233,NC233</td>
+<tr><td>MA60056</td>
+<td>REGRESSION &amp; TIME SERIES MODELS</td>
+<td>Buddhananda Banerjee</td>
+<td>4-0-0</td>
+<td>4</td>
+<td>V4</td>
+<td>NC142</td>
+<tr><td>MA60067</td>
+<td>STOCHASTIC PROCESS AND SIMULATION</td>
+<td>Nitin Gupta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, H3</td>
+<td>NC142</td>
+<tr><td>MA61002</td>
+<td>SWITCHING AND AUTOMATA THEORY</td>
+<td>Ratna Dutta</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>NC142</td>
+<tr><td>MA61008</td>
+<td>ARTIFICIAL INTELLIGENCE</td>
+<td>Pawan Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, A3</td>
+<td>NC233</td>
+<tr><td>MA61010</td>
+<td>COMPUTER NETWORKS</td>
+<td>Pawan Kumar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, B3</td>
+<td>NC233</td>
+<tr><td>MA61018</td>
+<td>FILE ORGANIZATION AND DATABASE SYSTEMS</td>
+<td>Adrijit Goswami</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NC142</td>
+<tr><td>MA61028</td>
+<td>BOUNDARY INTEGRAL METHODS</td>
+<td>G P Raja Sekhar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N322</td>
+<tr><td>MA61032</td>
+<td>THEORY OF OPERATORS</td>
+<td>Parmeshwary Dayal Srivastava</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>N320</td>
+<tr><td>MA61046</td>
+<td>MULTI-OBJECTIVE PROGRAMMING</td>
+<td>Mahendra Prasad Biswal</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>NC241</td>
+<tr><td>MA61052</td>
+<td>INTEGRAL EQUATIONS AND VARIATIONAL METHODS</td>
+<td>Rupanwita Gayen</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>S3, G3</td>
+<td>NC142</td>
+<tr><td>MA69002</td>
+<td>SEMINAR-II</td>
+<td>P V S N Murthy,Rajni Kant Pandey,Umesh Chandra Gupta,Bibhas Adhikari</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>B.R. Seth Seminar Room</td>
+<tr><td>MA69004</td>
+<td>DATA STRUCTURE AND ALGORITHM LABORATORY</td>
+<td>Sourav Mukhopadhyay</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>PC_Lab-IV</td>
+<tr><td>MA69006</td>
+<td>OPERATING SYSTEMS DESIGN LABORATORY</td>
+<td>Dharmendra Kumar Gupta,Pawan Kumar</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P</td>
+<td>PC_Lab-IV</td>
+<tr><td>MA71002</td>
+<td>COMMUTATIVE ALGEBRA</td>
+<td>Mousumi Mandal,Ramakrishna Nanduri</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>V4</td>
+<td>NC233,NC233</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

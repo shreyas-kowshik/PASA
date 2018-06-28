@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+
+     function printInfo(elementid,styleSheetHref){
+        var prtContent="&lt;html&gt;&lt;head&gt;";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="&lt;link rel='StyleSheet' href='"+styleSheetHref+"' /&gt;";
+        }
+        prtContent+="&lt;/head&gt;&lt;body&gt;";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="&lt;/body&gt;";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+
+      function getsub_details(subno,obj)
+{
+  // alert(subno);
+
+  var xmlHttp;
+     //var subno=document.getElementById(row_id).value==''?document.getElementById(nex_row_id).value:document.getElementById(row_id).value;
+    // alert(subno);
+        try
+        {  // Firefox, Opera 8.0+, Safari
+            xmlHttp=new XMLHttpRequest();
+        }
+        catch (e)
+        {  // Internet Explorer
+            try
+            {
+                xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch (e)
+            {
+                try
+                {
+                    xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                catch (e)
+                {
+                    alert("Your browser does not support AJAX!");
+                    return false;
+                }
+            }
+        }
+        xmlHttp.open("GET","getsub_view.jsp?subno="+subno+"&amp;session="+document.getElementById('session').value,false);
+        xmlHttp.send(null);
+        if(xmlHttp.status==200){
+            document.getElementById('nameList').style.display='inline';
+           var detail_info=xmlHttp.responseText;
+           toggleList(obj,'show', detail_info)
+        }
+
+     }
+
+
+
+
+ function toggleList(obj,action, detail_info){
+            var div_ref = document.getElementById('nameList');
+            var x=0,y=0;
+            var obj1 = obj;
+            while(obj.offsetParent){
+                x += obj.offsetLeft;
+                y += obj.offsetTop;
+                obj = obj.offsetParent;
+            }
+            var abs_x = x+'px', abs_y = (y+obj1.offsetHeight)+'px';
+            div_ref.style.left = abs_x;
+            div_ref.style.top = abs_y;
+            div_ref.innerHTML=detail_info;
+            switch(action){
+                case 'show':
+                div_ref.style.display = 'block';
+                break;
+                case 'hide':
+                div_ref.style.display = 'none';
+                break;
+                default:
+            }
+        }
+ </script>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Time Table View</title>
+<link href="../css/style1.css" rel="StyleSheet"/>
+</head>
+<body><form action="secwiseview.jsp?action=first" method="post" name="frm">
+<div id="printIt">
+<center><font color=""><b></b></font></center>
+<table border="1" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white"><td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">Day Name</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">8:00:AM-8:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">9:00:AM-9:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">10:00:AM-10:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">11:00:AM-11:55:AM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">12:00:PM-12:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">2:00:PM-2:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">3:00:PM-3:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">4:00:PM-4:55:PM</td>
+<td class="tableheader" nowrap="" style="padding-top:5px;padding-bottom:5px;padding-left:7px;padding-right:7px">5:00:PM-5:55:PM</td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Mon</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60023&lt;BR&gt;(SPP)&lt;BR&gt;CSE-108",this)'>CS60023<br/>(SPP)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60023&lt;BR&gt;(SPP)&lt;BR&gt;CSE-108",this)'>CS60023<br/>(SPP)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS41001&lt;BR&gt;(SCR)&lt;BR&gt;NC331",this)'>CS41001<br/>(SCR)<br/>NC331</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40019&lt;BR&gt;(PPD)&lt;BR&gt;NC243",this)'>CS40019<br/>(PPD)<br/>NC243</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60059&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60059<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60059&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60059<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60019&lt;BR&gt;(SS)&lt;BR&gt;ITCLA1",this)'>CS60019<br/>(SS)<br/>ITCLA1</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("IT60111&lt;BR&gt;(SKG)&lt;BR&gt;ITCLA1",this)'>IT60111<br/>(SKG)<br/>ITCLA1</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("IT60111&lt;BR&gt;(SKG)&lt;BR&gt;ITCLA1",this)'>IT60111<br/>(SKG)<br/>ITCLA1</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60071&lt;BR&gt;(JM)&lt;BR&gt;CSE-108",this)'>CS60071<br/>(JM)<br/>CSE-108</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px" valign="top">Tue</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40019&lt;BR&gt;(PPD)&lt;BR&gt;NC243",this)'>CS40019<br/>(PPD)<br/>NC243</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40019&lt;BR&gt;(PPD)&lt;BR&gt;NC243",this)'>CS40019<br/>(PPD)<br/>NC243</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60023&lt;BR&gt;(SPP)&lt;BR&gt;CSE-108",this)'>CS60023<br/>(SPP)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60019&lt;BR&gt;(SS)&lt;BR&gt;ITCLA1",this)'>CS60019<br/>(SS)<br/>ITCLA1</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60019&lt;BR&gt;(SS)&lt;BR&gt;ITCLA1",this)'>CS60019<br/>(SS)<br/>ITCLA1</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60059&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60059<br/>(RM)<br/>CSE-119</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60071&lt;BR&gt;(JM)&lt;BR&gt;CSE-108",this)'>CS60071<br/>(JM)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60071&lt;BR&gt;(JM)&lt;BR&gt;CSE-108",this)'>CS60071<br/>(JM)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("IT60111&lt;BR&gt;(SKG)&lt;BR&gt;ITCLA1",this)'>IT60111<br/>(SKG)<br/>ITCLA1</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px" valign="top">Wed</td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS41001&lt;BR&gt;(SCR)&lt;BR&gt;NC331",this)'>CS41001<br/>(SCR)<br/>NC331</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS41001&lt;BR&gt;(SCR)&lt;BR&gt;NC331",this)'>CS41001<br/>(SCR)<br/>NC331</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40003&lt;BR&gt;(DS)&lt;BR&gt;V2",this)'>CS40003<br/>(DS)<br/>V2</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60017&lt;BR&gt;(SG)&lt;BR&gt;CSE-119",this)'>CS60017<br/>(SG)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60047&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60047<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60045&lt;BR&gt;(PD+ PPC)&lt;BR&gt;NR421",this)'>CS60045<br/>(PD+ PPC)<br/>NR421</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60021&lt;BR&gt;(SB)&lt;BR&gt;CSE-107",this)'>CS60021<br/>(SB)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60057&lt;BR&gt;(SS)&lt;BR&gt;NR423",this)'>CS60057<br/>(SS)<br/>NR423</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60067&lt;BR&gt;(IS)&lt;BR&gt;CSE-107",this)'>CS60067<br/>(IS)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60026&lt;BR&gt;(AD)&lt;BR&gt;CSE-108",this)'>CS60026<br/>(AD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60065&lt;BR&gt;(DM)&lt;BR&gt;CSE-107",this)'>CS60065<br/>(DM)<br/>CSE-107</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60089&lt;BR&gt;(AH)&lt;BR&gt;CSE-120",this)'>CS60089<br/>(AH)<br/>CSE-120</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60050&lt;BR&gt;(PM)&lt;BR&gt;NC244",this)'>CS60050<br/>(PM)<br/>NC244</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60087&lt;BR&gt;(PSD)&lt;BR&gt;CSE-108",this)'>CS60087<br/>(PSD)<br/>CSE-108</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS61063&lt;BR&gt;(SD)&lt;BR&gt;CSE-108",this)'>CS61063<br/>(SD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60092&lt;BR&gt;(NG+ SB)&lt;BR&gt;CSE-120",this)'>CS60092<br/>(NG+ SB)<br/>CSE-120</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px" valign="top">Thur</td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40003&lt;BR&gt;(DS)&lt;BR&gt;V2",this)'>CS40003<br/>(DS)<br/>V2</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS41001&lt;BR&gt;(SCR)&lt;BR&gt;NC331",this)'>CS41001<br/>(SCR)<br/>NC331</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60047&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60047<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60017&lt;BR&gt;(SG)&lt;BR&gt;CSE-119",this)'>CS60017<br/>(SG)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60045&lt;BR&gt;(PD+ PPC)&lt;BR&gt;NR421",this)'>CS60045<br/>(PD+ PPC)<br/>NR421</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60057&lt;BR&gt;(SS)&lt;BR&gt;NR423",this)'>CS60057<br/>(SS)<br/>NR423</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60021&lt;BR&gt;(SB)&lt;BR&gt;CSE-107",this)'>CS60021<br/>(SB)<br/>CSE-107</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60067&lt;BR&gt;(IS)&lt;BR&gt;CSE-107",this)'>CS60067<br/>(IS)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60065&lt;BR&gt;(DM)&lt;BR&gt;CSE-107",this)'>CS60065<br/>(DM)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60026&lt;BR&gt;(AD)&lt;BR&gt;CSE-108",this)'>CS60026<br/>(AD)<br/>CSE-108</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60089&lt;BR&gt;(AH)&lt;BR&gt;CSE-120",this)'>CS60089<br/>(AH)<br/>CSE-120</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60087&lt;BR&gt;(PSD)&lt;BR&gt;CSE-108",this)'>CS60087<br/>(PSD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60050&lt;BR&gt;(PM)&lt;BR&gt;NC244",this)'>CS60050<br/>(PM)<br/>NC244</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS61063&lt;BR&gt;(SD)&lt;BR&gt;CSE-108",this)'>CS61063<br/>(SD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60092&lt;BR&gt;(SB+ NG)&lt;BR&gt;CSE-120",this)'>CS60092<br/>(SB+ NG)<br/>CSE-120</a></td>
+</tr>
+<tr bgcolor="white">
+<td class="tableheader" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px" valign="top">Fri</td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60017&lt;BR&gt;(SG)&lt;BR&gt;CSE-119",this)'>CS60017<br/>(SG)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60047&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60047<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60047&lt;BR&gt;(RM)&lt;BR&gt;CSE-119",this)'>CS60047<br/>(RM)<br/>CSE-119</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS40003&lt;BR&gt;(DS)&lt;BR&gt;V2",this)'>CS40003<br/>(DS)<br/>V2</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60067&lt;BR&gt;(IS)&lt;BR&gt;CSE-107",this)'>CS60067<br/>(IS)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+<td align="center" colspan="1" nowrap="" rowspan="5" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details(" ",this)'> </a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60021&lt;BR&gt;(SB)&lt;BR&gt;CSE-107",this)'>CS60021<br/>(SB)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60057&lt;BR&gt;(SS)&lt;BR&gt;NR423",this)'>CS60057<br/>(SS)<br/>NR423</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60065&lt;BR&gt;(DM)&lt;BR&gt;CSE-107",this)'>CS60065<br/>(DM)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60045&lt;BR&gt;(PD+ PPC)&lt;BR&gt;NR421",this)'>CS60045<br/>(PD+ PPC)<br/>NR421</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60089&lt;BR&gt;(AH)&lt;BR&gt;CSE-120",this)'>CS60089<br/>(AH)<br/>CSE-120</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60026&lt;BR&gt;(AD)&lt;BR&gt;CSE-108",this)'>CS60026<br/>(AD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60065&lt;BR&gt;(DM)&lt;BR&gt;CSE-107",this)'>CS60065<br/>(DM)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60087&lt;BR&gt;(PSD)&lt;BR&gt;CSE-108",this)'>CS60087<br/>(PSD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60067&lt;BR&gt;(IS)&lt;BR&gt;CSE-107",this)'>CS60067<br/>(IS)<br/>CSE-107</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="3" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS61063&lt;BR&gt;(SD)&lt;BR&gt;CSE-108",this)'>CS61063<br/>(SD)<br/>CSE-108</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="2" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60050&lt;BR&gt;(PM)&lt;BR&gt;NC244",this)'>CS60050<br/>(PM)<br/>NC244</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60087&lt;BR&gt;(PSD)&lt;BR&gt;CSE-108",this)'>CS60087<br/>(PSD)<br/>CSE-108</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60089&lt;BR&gt;(AH)&lt;BR&gt;CSE-120",this)'>CS60089<br/>(AH)<br/>CSE-120</a></td>
+</tr>
+<tr bgcolor="white">
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS60092&lt;BR&gt;(NG+ SB)&lt;BR&gt;CSE-120",this)'>CS60092<br/>(NG+ SB)<br/>CSE-120</a></td>
+<td align="center" colspan="1" nowrap="" rowspan="1" style="padding-top:5px;padding-bottom:5px"> <a href="normal" onmouseover='getsub_details("CS61063&lt;BR&gt;(SD)&lt;BR&gt;CSE-108",this)'>CS61063<br/>(SD)<br/>CSE-108</a></td>
+</tr>
+</tbody></table></div><input id="semester" name="semester" type="hidden" value="AUTUMN"/>
+<input id="session" name="session" type="hidden" value="2018-2019"/>
+</form>
+<form action="../deptTimeTableReport.htm" method="GET" name="reportForm">
+<input id="semester" name="semester" type="hidden" value="AUTUMN"/>
+<input id="year1" name="year1" type="hidden" value="4"/>
+<input id="session" name="session" type="hidden" value="2018-2019"/>
+<input id="course" name="course" type="hidden" value="CS"/>
+<input id="dept" name="dept" type="hidden" value="CS"/>
+<center><input class="button" type="submit" value="GetReport"/></center></form>
+<div align="right" id="nameList" onmouseout="this.style.display = 'none';" onmouseover="this.style.display = 'block';" style="background-color:#FFFFCC;border:thin;border-style:solid;border-color:#FFFFFF ;position:absolute;display:none">
+</div></body></html>

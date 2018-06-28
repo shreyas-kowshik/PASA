@@ -1,0 +1,186 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : CL</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>CL60002</td>
+<td>OCEAN DYNAMICS</td>
+<td>C Shaji,Mihir Kumar Dash</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>Class Room-1</td>
+<tr><td>CL60004</td>
+<td>GLOBAL TECTONICS AND CLIMATE</td>
+<td>Jayanarayanan Kuttippurath,Mukunda Dev Behera</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>Class Room-1</td>
+<tr><td>CL60006</td>
+<td>OCEAN COLOR AND APPLICATIONS</td>
+<td>Prem Chand Pandey</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>Class Room-2</td>
+<tr><td>CL60020</td>
+<td>MODELING OF AIR-SEA INTERACTIONS</td>
+<td>Achanta Naga Venkata Satyanarayana,Mihir Kumar Dash</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>Class Room-1</td>
+<tr><td>CL60028</td>
+<td>LAND SYSTEM STUDIES</td>
+<td>Mukunda Dev Behera</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>Class Room-1</td>
+<tr><td>CL61008</td>
+<td>AN INTRODUCTION TO GLOBAL SPECTRAL MODELING</td>
+<td>Arun Chakraborty</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>Class Room-2</td>
+<tr><td>CL61012</td>
+<td>CLIMATE RISK ASSESSMENT IN AGRICULTURE</td>
+<td>Jayanarayanan Kuttippurath</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>Class Room-2</td>
+<tr><td>CL61018</td>
+<td>COASTAL PROCESSES &amp; ECOSYSTEM</td>
+<td>C Shaji</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>Class Room-1</td>
+<tr><td>CL61024</td>
+<td>CLIMATE MODELING</td>
+<td>Achanta Naga Venkata Satyanarayana</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>Class Room-1</td>
+<tr><td>CL67102</td>
+<td>THESIS PART-II</td>
+<td>Jayanarayanan Kuttippurath</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>CL68101</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Achanta Naga Venkata Satyanarayana</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>CL69002</td>
+<td>SEMINAR-II</td>
+<td>Arun Chakraborty</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X4</td>
+<td>Class Room-1</td>
+<tr><td>CL69004</td>
+<td>LABORATORY-III(OCEAN AND STORM SURGE MODELING)</td>
+<td>Arun Chakraborty</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>I2, V4</td>
+<td>M. Tech. Lab-1</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>

@@ -1,0 +1,536 @@
+
+<script language="JavaScript" src="./build/common.js" type="text/javascript"></script>
+<script>
+    function getDept()
+    {
+
+        document.frm.method="POST"    ;
+        document.frm.action="timetable_track.jsp?action=second&dept="+document.getElementById('dept').value;
+        document.frm.submit();
+    }
+
+    function openWin()
+    {
+        // window.open("view/slot_info.jsp","mywindow","menubar=1,resizable=1,width=1000,height=1000");
+        window.open("view/slot_info.jsp");
+    }
+
+
+
+    function changeSemester(val){
+        var curSes =document.getElementById('for_session').value;
+        var curSem =document.getElementById('for_semester').value;
+        if(val=='N'){
+            if(curSem=='SPRING'){
+                document.getElementById('for_semester').value='AUTUMN';
+                var year=curSes.split('-');
+                var nextSem=year[1]+'-'+(parseInt(year[1])+1);
+                document.getElementById('for_session').value=nextSem;
+            }else{
+                document.getElementById('for_semester').value='SPRING';
+            }
+        }else if(val=='P'){
+            if(curSem=='AUTUMN'){
+                document.getElementById('for_semester').value='SPRING';
+                var year=curSes.split('-');
+                var prevSem=(parseInt(year[0])-1)+'-'+year[0];
+                document.getElementById('for_session').value=prevSem;
+            }else{
+                document.getElementById('for_semester').value='AUTUMN';
+            }
+        }
+        //recall();
+        //   submitForm();
+    }
+ function printInfo(elementid,styleSheetHref){
+        var prtContent="<html><head>";
+        if(typeof styleSheetHref != 'undefined'){
+            prtContent+="<link rel='StyleSheet' href='"+styleSheetHref+"' />";
+        }
+        prtContent+="</head><body>";
+        prtContent+=document.getElementById(elementid).innerHTML;
+        prtContent+="</body>";
+        //alert(prtContent);
+        var WinPrint =window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
+<html>
+<head>
+<link href="./css/style1.css" rel="StyleSheet"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>JSP Page</title>
+</head>
+<body onload="save()"><table align="center"><tr><td><form action="timetable_track.jsp?action=second" method="post" name="frm">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="80%"><tr><td>
+<input class="button" onclick="printInfo('printIt','./css/style1.css')" type="button" value=" Print "/>
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left"><b>Department : EE</b></td>
+<td align="right"><a href="timetable_track.jsp?action=first">Back</a></td>
+</tr></table>
+</td></tr>
+<tr><td>
+<div id="printIt"> <table align="center" border="0">
+<tr>
+<td valign="top">
+<table align="center" border="1" cellpadding="3" cellspacing="0" id="disptab" style="border-color:#557CD7">
+<tr><td colspan="7"><center><b>List Of Subjects Allocated</b></center></td></tr>
+<tr>
+<th>Subject No</th>
+<th>Subject Name</th>
+<th>Faculty Name</th>
+<th>Ltp</th>
+<th>Credits</th>
+<th>Slot</th>
+<th>Room</th>
+<tr><td>EE11001</td>
+<td>ELECTRICAL TECHNOLOGY</td>
+<td>Tanmoy Bhattacharya,Ashok Kumar Pradhan,Tapas Kumar Bhattacharyya,Santanu Kapat</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>--</td>
+<tr><td>EE19001</td>
+<td>ELECTRICAL TECHNOLOGY LAB.</td>
+<td>Tanmoy Bhattacharya,Ashok Kumar Pradhan,Tapas Kumar Bhattacharyya,Sourav Patra,Murali Mohan Bosukonda,Rajiv Ranjan Sahay,Prabodh Bajpai,Saurav Pramanik,Santanu Kapat,Sarit Kumar Das,Arun Ghosh,Amit Patra,Siddhartha Sen,Dipankar Debnath,Chandan Chakraborty</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>--</td>
+<tr><td>EE21002</td>
+<td>ELECTRICAL MACHINES</td>
+<td>Souvik Chattopadhyay</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NR223</td>
+<tr><td>EE21004</td>
+<td>MEASUREMENTS AND ELECTRONIC INSTRUMENTS</td>
+<td>Avishek Chatterjee,Ashis Maity</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>NR222</td>
+<tr><td>EE29002</td>
+<td>ELECTRICAL MACHINES LAB.</td>
+<td>Chandan Chakraborty,Dipankar Debnath,Souvik Chattopadhyay,Suman Maiti</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, N</td>
+<td>NC232,NC232</td>
+<tr><td>EE29004</td>
+<td>MEASUREMENTS AND ELECTRONIC INSTRUMENTS LAB.</td>
+<td>Siddhartha Sen,Anirban Mukherjee,Avishek Chatterjee,Nirmalya Ghosh</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, J, L, N</td>
+<td>Measurement Lab</td>
+<tr><td>EE30004</td>
+<td>EMBEDDED SYSTEMS</td>
+<td>Debdoot Sheet</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NC331</td>
+<tr><td>EE30012</td>
+<td>ELECTROMAGNETIC THEORY &amp; APPL</td>
+<td>Saurav Pramanik</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>E3</td>
+<td>NEX201</td>
+<tr><td>EE31002</td>
+<td>POWER SYSTEMS</td>
+<td>N K Kishore</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NC232</td>
+<tr><td>EE39002</td>
+<td>POWER SYSTEMS LAB.</td>
+<td>Prabodh Bajpai,Debapriya Das,Saurav Pramanik</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>J, X4, L</td>
+<td>HV Lab.#Machines Lab.</td>
+<tr><td>EE39004</td>
+<td>EMBEDDED SYSTEMS LAB.</td>
+<td>Alok Kanti Deb,Ashis Maity,Aurobinda Routray,Amit Patra</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, J, X4, N</td>
+<td>Embedded Systems Lab</td>
+<tr><td>EE40002</td>
+<td>ELECTRIC DRIVES</td>
+<td>Dipankar Debnath,Chandan Chakraborty</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>NC232,NC232</td>
+<tr><td>EE47008</td>
+<td>PROJECT - PART 2</td>
+<td>Aurobinda Routray</td>
+<td>0-0-9</td>
+<td>6</td>
+<td>--</td>
+<tr><td>EE48002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>EE49004</td>
+<td>POWER APPARATUS &amp; SYSTEM DESIGN</td>
+<td>N K Kishore,Debaprasad Kastha</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>NR121,NR121</td>
+<tr><td>EE57202</td>
+<td>PROJECT - PART 4</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>EE57302</td>
+<td>PROJECT - PART 4</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>EE57402</td>
+<td>PROJECT - PART 4</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>EE57502</td>
+<td>PROJECT - PART 4</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>EE58004</td>
+<td>COMPREHENSIVE VIVA - II</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>EE60002</td>
+<td>ADVANCED MACHINE DRIVES</td>
+<td>Gautam Poddar</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N227</td>
+<tr><td>EE60004</td>
+<td>ADVANCED POWER ELECTRONIC CONVERTERS</td>
+<td>Debaprasad Kastha</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>N227</td>
+<tr><td>EE60006</td>
+<td>ROBUST CONTROL</td>
+<td>Sourav Patra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>NEX202</td>
+<tr><td>EE60012</td>
+<td>OPTIMAL CONTROL</td>
+<td>Alok Kanti Deb</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>N232</td>
+<tr><td>EE60014</td>
+<td>NON-LINEAR CONTROL</td>
+<td>Murali Mohan Bosukonda</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>H3</td>
+<td>N232</td>
+<tr><td>EE60016</td>
+<td>SMART GRID</td>
+<td>Ashok Kumar Pradhan,Prabodh Bajpai,N K Kishore</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>B3</td>
+<td>N227</td>
+<tr><td>EE60024</td>
+<td>POWER SYSTEM DYNAMICS AND CONTROL</td>
+<td>Dheeman Chatterjee</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>NEX201</td>
+<tr><td>EE60034</td>
+<td>INDUSTRIAL AUTOMATION AND CONTROL</td>
+<td>Siddhartha Mukhopadhyay</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>B3</td>
+<td>N232</td>
+<tr><td>EE60048</td>
+<td>ADVANCED CONTROL THEORY</td>
+<td>Sarit Kumar Das</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NEX202</td>
+<tr><td>EE60050</td>
+<td>ADAPTIVE AND LEARNING CONTROL</td>
+<td>Arun Ghosh</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>F3</td>
+<td>NEX202</td>
+<tr><td>EE60052</td>
+<td>ADVANCED ESTIMATION THEORY</td>
+<td>Anirban Mukherjee</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>N227</td>
+<tr><td>EE60058</td>
+<td>OPTO-ELECTRONICS BASED INSTRUMENTATION</td>
+<td>Pranab Kumar Dutta</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>N232</td>
+<tr><td>EE60059</td>
+<td>PROCESS MONITORING AND FAULT DIAGNOSTICS</td>
+<td>Amit Patra</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>C3</td>
+<td>N232</td>
+<tr><td>EE60068</td>
+<td>ARTIFICIAL INTELLIGENCE APPLICATION TO POWER SYSTEMS</td>
+<td>Debapriya Das</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>N232</td>
+<tr><td>EE60082</td>
+<td>ELECTRIC VEHICLES</td>
+<td>Dipankar Debnath,Siddhartha Mukhopadhyay</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>G3</td>
+<td>N208</td>
+<tr><td>EE60096</td>
+<td>HIGH VOLTAGE DIRECT CURRENT TRANSMISSION (HVDC) AND FLEXIBLE ALTERNATING CURRENT TRANSMISSION SYSTEMS (FACTS)</td>
+<td>Suman Maiti</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>E4</td>
+<td>N227</td>
+<tr><td>EE60100</td>
+<td>MIXED SIGNAL CIRCUITS AND SYSTEMS ON CHIP</td>
+<td>Alok Barua</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>U4</td>
+<td>NEX201</td>
+<tr><td>EE60101</td>
+<td>ADVANCED SENSING TECHNIQUES</td>
+<td>Karabi Biswas</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>D4</td>
+<td>NEX201</td>
+<tr><td>EE60102</td>
+<td>STATISTICAL SIGNAL PROCESSING</td>
+<td>Aurobinda Routray</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>F4</td>
+<td>NEX201</td>
+<tr><td>EE61008</td>
+<td>MEDICAL IMAGE ANALYSIS</td>
+<td>Nirmalya Ghosh</td>
+<td>3-1-0</td>
+<td>4</td>
+<td>C4</td>
+<td>N227</td>
+<tr><td>EE67102</td>
+<td>PROJECT (PART-II)</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>EE67202</td>
+<td>PROJECT (PART-II)</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>EE67302</td>
+<td>PROJECT (PART-II)</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>EE67402</td>
+<td>PROJECT (PART-II)</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>EE68101</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Souvik Chattopadhyay</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>EE68201</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Arun Ghosh</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>EE68301</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Ashok Kumar Pradhan</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>EE68401</td>
+<td>COMPREHENSIVE VIVA-VOCE</td>
+<td>Karabi Biswas</td>
+<td>0-0-0</td>
+<td>3</td>
+<td>--</td>
+<tr><td>EE69004</td>
+<td>MACHINE DRIVES LABORATORY</td>
+<td>Gautam Poddar</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>Machines Lab.</td>
+<tr><td>EE69010</td>
+<td>INSTRUMENTATION LABORATORY II</td>
+<td>Karabi Biswas</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>Instrumentaion lab</td>
+<tr><td>EE69014</td>
+<td>REAL TIME SIGNAL PROCESSING LABORATORY</td>
+<td>Anirban Mukherjee,Debdoot Sheet</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P, X</td>
+<td>N240</td>
+<tr><td>EE69018</td>
+<td>POWER AND ENERGY SYSTEM SIMULATION LAB</td>
+<td>Debapriya Das,Dheeman Chatterjee</td>
+<td>0-0-6</td>
+<td>4</td>
+<td>P, N</td>
+<td>Computer Lab#HV Lab.</td>
+<tr><td>EE69022</td>
+<td>CONTROL SYSTEMS LABORATORY-II</td>
+<td>Sarit Kumar Das</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>Control Lab (PG)</td>
+<tr><td>EE69102</td>
+<td>SEMINAR-II</td>
+<td>Debaprasad Kastha</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>N</td>
+<td>N227</td>
+<tr><td>EE69202</td>
+<td>SEMINAR-II</td>
+<td>Sourav Patra</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>N227</td>
+<tr><td>EE69302</td>
+<td>SEMINAR-II</td>
+<td>Dheeman Chatterjee</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>N232</td>
+<tr><td>EE69402</td>
+<td>SEMINAR-II</td>
+<td>Anirban Mukherjee</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>P</td>
+<td>N227</td>
+<tr><td>EE87001</td>
+<td>PROJECT - II</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>20</td>
+<td>--</td>
+<tr><td>IE30002</td>
+<td>INSTRUMENTATION DEVICES-II</td>
+<td>Siddhartha Sen</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>A3</td>
+<td>NEX201</td>
+<tr><td>IE30006</td>
+<td>DATA COMMUNICATION</td>
+<td>Rajiv Ranjan Sahay</td>
+<td>3-0-0</td>
+<td>3</td>
+<td>S3</td>
+<td>NC232</td>
+<tr><td>IE39002</td>
+<td>INSTRUMENTATION LABORATORY-II</td>
+<td>Alok Barua</td>
+<td>0-0-3</td>
+<td>2</td>
+<td>X</td>
+<td>Instrumentaion lab</td>
+<tr><td>IE47006</td>
+<td>PROJECT-II</td>
+<td>Aurobinda Routray</td>
+<td>0-0-9</td>
+<td>6</td>
+<td>--</td>
+<tr><td>IE48002</td>
+<td>COMPREHENSIVE VIVA VOCE</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+<tr><td>IE57102</td>
+<td>PROJECT - IV</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>IE57202</td>
+<td>PROJECT - IV</td>
+<td>Debapriya Das</td>
+<td>0-0-14</td>
+<td>13</td>
+<td>--</td>
+<tr><td>IE58102</td>
+<td>COMPREHENSIVE VIVA - II</td>
+<td>Debapriya Das</td>
+<td>0-0-0</td>
+<td>2</td>
+<td>--</td>
+</tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></tr></table>
+</td>
+</tr>
+</table></div>
+</td></tr></table></form></td></tr></table>
+</body>
+</html>
