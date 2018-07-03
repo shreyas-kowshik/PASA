@@ -27,4 +27,4 @@ python subjects_html2json.py (OR) python timetable2json.py
 ```
 
 <h1>Contribution : </h1>
-Read the wiki for the description of the code.
+Read the <a href = "https://github.com/shreyas-kowshik/PASA/wiki">wiki</a> for the description of the code.
